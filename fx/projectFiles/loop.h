@@ -495,7 +495,7 @@ struct hero_ {
 			int startPoint = rand() % (Object::starLineList.line[startLine].pointCount-2)+1;
 
 			startLine = 0;
-			startPoint = 2;
+			startPoint = 38;
 
 			float4 destPoint = Object::starLineList.line[startLine].point[startPoint];
 			pos += F2V(destPoint);
