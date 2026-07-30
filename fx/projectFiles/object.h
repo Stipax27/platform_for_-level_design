@@ -1,4 +1,4 @@
-float distance(const float4& p1, const float4& p2) {
+4966float distance(const float4& p1, const float4& p2) {
 	float dx = p2.x - p1.x;
 	float dy = p2.y - p1.y;
 	float dz = p2.z - p1.z;
@@ -866,21 +866,209 @@ namespace Object {
 		*/
 		
 
+		//====================
+// 1 -> 14
+//===================
 		NewLine();
-		AddPointToLine({ 0,0,0 });
-		AddPointToLine({ 100,0,0 });
-		AddPointToLine({ 200,0,0 });
-		AddPointToLine({ 200,110,0 });
-		AddPointToLine({ 100,110,0 });
-		AddPointToLine({ 0,10,0 });
+		AddPointToLine({ 0,14,0 });
 
+		AddPointToLine({ 22,0,-39 });
+		AddPointToLine({ 25,-6,-46 });
+		AddPointToLine({ 24,-14,-47 });
+
+		AddPointToLine({ 26,-17,-31 });
+		AddPointToLine({ 22,-6,-29 });
+		AddPointToLine({ 18,-2,-34 });
+		AddPointToLine({ 20,-9,-37 });
+
+		AddPointToLine({ 30,-12,-26 });
+		AddPointToLine({ 39,23,-8 });
+		AddPointToLine({ 81,18,15 });
+		AddPointToLine({ 63,-1,4 });
+		AddPointToLine({ 22,-18,-42 });
+		AddPointToLine({ 36,-4,-53 });
+		AddPointToLine({ 24,-2,-44 });
+		AddPointToLine({ 38,-20,-19 });
+		AddPointToLine({ 43,13,19 });
+		AddPointToLine({ 26,18,-2 });
+		AddPointToLine({ 36,19,-17 });
+		AddPointToLine({ 30,20,-32 });
+		AddPointToLine({ 21,-9,-29 });
+		AddPointToLine({ 38,-15,-8 });
+		AddPointToLine({ 50,-6,-13 });
+		AddPointToLine({ 35,-2,-21 });
+		AddPointToLine({ 18,0,-22 });
+		AddPointToLine({ 16,-13,-25 });
+		AddPointToLine({ 11,-21,-3 });
+
+		AddPointToLine({ 63,-22,-10 });
+		AddPointToLine({ 28,5,5 });
+		AddPointToLine({ 51,5,9 });
+		AddPointToLine({ 39,4,-18 });
+		AddPointToLine({ 19,-1,-12 });
+		AddPointToLine({ 24,-24,-15 });
+		AddPointToLine({ 62,-11,-11 });
+		AddPointToLine({ 60,-50,-20 });
+
+		//====================
+		// 14 -> 9
+		//====================
 		NewLine();
-		AddPointToLine({ 0,0,3 });
-		AddPointToLine({ 100,0,10 });
-		AddPointToLine({ 200,0,13 });
-		AddPointToLine({ 200,110,13 });
-		AddPointToLine({ 100,110,3 });
-		AddPointToLine({ 0,10,3 });
+		AddPointToLine({ 60,-50,-20 });
+		AddPointToLine({ 61,-50,-20 });
+		AddPointToLine({ 60,-50,-20 });
+
+		AddPointToLine({ 141,20,-35 });
+		AddPointToLine({ 95,-3,-68 });
+		AddPointToLine({ 61,-6,-28 });
+
+		AddPointToLine({ 80,26,-33 });
+		AddPointToLine({ 76,24,-40 });
+		AddPointToLine({ 64,7,-48 });
+
+		AddPointToLine({ 44,-12,-50 });
+		AddPointToLine({ 32,22,-68 });
+		AddPointToLine({ 44,39,-22 });
+
+		AddPointToLine({ 44,32,60 });
+		AddPointToLine({ 12,52,-5 });
+		AddPointToLine({ 44,57,-26 });
+
+		AddPointToLine({ 31,15,-57 });
+		AddPointToLine({ 26,5,2 });
+		AddPointToLine({ 42,37,-4 });
+
+		AddPointToLine({ 69,28,-58 });
+		AddPointToLine({ 35,40,-65 });
+
+		//====================
+		// 14 -> 12
+		//====================
+		NewLine();
+		AddPointToLine({ 60,-50,-20 });
+
+		AddPointToLine({ 75,0,-16 });
+
+		AddPointToLine({ 90,0,-12 });
+
+		AddPointToLine({ 105,-100,-8 });
+
+		//====================
+		// 14 -> 8
+		//====================
+		NewLine();
+		AddPointToLine({ 60,0,-20 });
+		AddPointToLine({ 70,0,-50 });
+		AddPointToLine({ 80,0,-80 });
+		AddPointToLine({ 90,0,-110 });
+
+		//====================
+		// 8 -> 10
+		//====================
+		NewLine();
+		AddPointToLine({ 90,0,-110 });
+		AddPointToLine({ 90,0,-143 });
+		AddPointToLine({ 90,0,-176 });
+		AddPointToLine({ 90,0,-210 });
+
+		//====================
+		// 10 -> 7
+		//====================
+		NewLine();
+		AddPointToLine({ 90,0,-210 });
+		AddPointToLine({ 120,0,-233 });
+		AddPointToLine({ 150,0,-256 });
+		AddPointToLine({ 180,0,-280 });
+
+		//====================
+		// 8 -> 13
+		//====================
+		NewLine();
+		AddPointToLine({ 90,0,-110 });
+		AddPointToLine({ 117,0,-130 });
+		AddPointToLine({ 143,0,-150 });
+		AddPointToLine({ 170,0,-170 });
+
+		//====================
+		// 13 -> 3
+		//====================
+		NewLine();
+		AddPointToLine({ 170,0,-170 });
+		AddPointToLine({ 200,0,-197 });
+		AddPointToLine({ 230,0,-223 });
+		AddPointToLine({ 260,0,-250 });
+
+		//====================
+		// 2 -> 17
+		//====================
+		NewLine();
+		AddPointToLine({ 40,0,70 });
+		AddPointToLine({ 93,0,58 });
+		AddPointToLine({ 147,0,46 });
+		AddPointToLine({ 200,0,35 });
+
+		//====================
+		// 12 -> 17
+		//====================
+		NewLine();
+		AddPointToLine({ 105,-100,-8 });
+		AddPointToLine({ 137,0,6 });
+		AddPointToLine({ 169,0,21 });
+		AddPointToLine({ 200,0,35 });
+
+		//====================
+		// 17 -> 11
+		//====================
+		NewLine();
+		AddPointToLine({ 200,0,35 });
+		AddPointToLine({ 230,0,57 });
+		AddPointToLine({ 260,0,78 });
+		AddPointToLine({ 290,0,100 });
+
+		//====================
+		// 17 -> 5
+		//====================
+		NewLine();
+		AddPointToLine({ 200,0,35 });
+		AddPointToLine({ 217,0,10 });
+		AddPointToLine({ 233,0,-15 });
+		AddPointToLine({ 250,0,-40 });
+
+		//====================
+		// 5 -> 15
+		//====================
+		NewLine();
+		AddPointToLine({ 250,0,-40 });
+		AddPointToLine({ 270,0,-83 });
+		AddPointToLine({ 290,0,-126 });
+		AddPointToLine({ 310,0,-170 });
+
+		//====================
+		// 5 -> 4
+		//====================
+		NewLine();
+		AddPointToLine({ 250,0,-40 });
+		AddPointToLine({ 280,0,-58 });
+		AddPointToLine({ 310,0,-77 });
+		AddPointToLine({ 340,0,-95 });
+
+		//====================
+		// 4 -> 6
+		//====================
+		NewLine();
+		AddPointToLine({ 340,0,-95 });
+		AddPointToLine({ 353,0,-95 });
+		AddPointToLine({ 367,0,-95 });
+		AddPointToLine({ 380,0,-95 });
+
+		//====================
+		// 6 -> 16
+		//====================
+		NewLine();
+		AddPointToLine({ 380,0,-95 });
+		AddPointToLine({ 397,0,-87 });
+		AddPointToLine({ 413,0,-78 });
+		AddPointToLine({ 430,0,-70 });
 
 
 		/*for (int i = 0; i < starsCount; i++)
@@ -1526,10 +1714,10 @@ namespace Object {
 		//hi
 		RenderTarget::Set({ texture::pBuf,0 });
 
-		vrg({ pillars_cnt/2,1,pMode::point,1390,925,111 });
+		//vrg({ pillars_cnt/2,1,pMode::point,1390,925,111 });
 		Maze({ 200000,1,pMode::point,1390,925,111 });
 
-		OuterSpace(outerSpace_cnt, 1, pMode::point);
+		//OuterSpace(outerSpace_cnt, 1, pMode::point);
 		//NeutronStar(neutronStar_cnt, 1, pMode::point);
 
 		//Galaxy({ galaxy_cnt, 14, pMode::point ,100,200,300 });
@@ -1544,7 +1732,7 @@ namespace Object {
 
 		//mid
 		RenderTarget::Set({ texture::pBufMid,0 });
-		vrg({ pillars_cnt,94,pMode::glow,20,30,75 });
+		//vrg({ pillars_cnt,94,pMode::glow,20,30,75 });
 		Maze({ 200000,94,pMode::glow,20,30,75 });
 
 		//Galaxy({ galaxy_cnt, 4, pMode::glow ,100,200,300 });

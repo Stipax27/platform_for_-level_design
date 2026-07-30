@@ -493,6 +493,10 @@ struct hero_ {
 			startAirDistance = length3(V2F(pos));
 			int startLine = rand()% Object::starLineList.lineCount;
 			int startPoint = rand() % (Object::starLineList.line[startLine].pointCount-2)+1;
+
+			startLine = 0;
+			startPoint = 2;
+
 			float4 destPoint = Object::starLineList.line[startLine].point[startPoint];
 			pos += F2V(destPoint);
 			gravity.mode = true;
