@@ -808,6 +808,13 @@ namespace Object {
 		AddPointToLine({ -13,21,4 });
 		AddPointToLine({ -18,-7,20 });
 
+		NewLine();
+
+		AddPointToLine({ -8,4,4 });
+		AddPointToLine({ -3,-3,-20 });
+		AddPointToLine({ -13,21,4 });
+		AddPointToLine({ -18,-7,20 });
+
 	
 		//------------end user space---------------
 		//-----------------------------------------
