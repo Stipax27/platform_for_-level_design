@@ -869,101 +869,106 @@ namespace Object {
 		//====================
 		// 1 -> 14
 		//===================
-		//NewLine();
-		//AddPointToLine({ 0,14,0 });    
-		//							   
-		//AddPointToLine({ 22,0,-39 });  
-		//AddPointToLine({ 25,-6,-46 }); 
-		//AddPointToLine({ 24,-14,-47 });
-		//							   
-		//AddPointToLine({ 26,-17,-31 });
-		//AddPointToLine({ 22,-6,-29 }); 
-		//AddPointToLine({ 18,-2,-34 }); 
-		//AddPointToLine({ 20,-9,-37 }); 
-		//							   
-		//AddPointToLine({ 30,-12,-26 });
-		//AddPointToLine({ 39,23,-8 });  
-		//AddPointToLine({ 81,18,15 });  
-		//AddPointToLine({ 63,-1,4 });   
-		//AddPointToLine({ 22,-18,-42 });
-		//AddPointToLine({ 36,-4,-53 }); 
-		//AddPointToLine({ 24,-2,-44 }); 
-		//AddPointToLine({ 38,-20,-19 });
-		//AddPointToLine({ 43,13,19 });  
-		//AddPointToLine({ 26,18,-2 });  
-		//AddPointToLine({ 36,19,-17 }); 
-		//AddPointToLine({ 30,20,-32 }); 
-		//AddPointToLine({ 21,-9,-29 }); 
-		//AddPointToLine({ 38,-15,-8 }); 
-		//AddPointToLine({ 50,-6,-13 }); 
-		//AddPointToLine({ 35,-2,-21 }); 
-		//AddPointToLine({ 18,0,-22 });  
-		//AddPointToLine({ 16,-13,-25 });
-		//AddPointToLine({ 11,-21,-3 }); 
-		//							   
-		//AddPointToLine({ 63,-22,-10 });
-		//AddPointToLine({ 28,5,5 });	   
-		//AddPointToLine({ 51,5,9 });	   
-		//AddPointToLine({ 39,4,-18 });  
-		//AddPointToLine({ 19,-1,-12 }); 
-		//AddPointToLine({ 24,-24,-15 });
-		//AddPointToLine({ 62,-11,-11 });
-		//AddPointToLine({ 60,-50,-20 }); //35
+		NewLine();
+		AddPointToLine({ 0,14,0 });    
+									   
+		AddPointToLine({ 22,0,-39 });  
+		AddPointToLine({ 25,-6,-46 }); 
+		AddPointToLine({ 24,-14,-47 });
+									   
+		AddPointToLine({ 26,-17,-31 });
+		AddPointToLine({ 22,-6,-29 }); 
+		AddPointToLine({ 18,-2,-34 }); 
+		AddPointToLine({ 20,-9,-37 }); 
+
+		NewLine();
+		AddPointToLine({ 30,-12,-26 });
+		AddPointToLine({ 39,23,-8 });  
+		AddPointToLine({ 81,18,15 });  
+		AddPointToLine({ 63,-1,4 });   
+		AddPointToLine({ 22,-18,-42 });
+		AddPointToLine({ 36,-4,-53 }); 
+		AddPointToLine({ 24,-2,-44 }); 
+		AddPointToLine({ 38,-20,-19 });
+		AddPointToLine({ 43,13,19 });  
+		AddPointToLine({ 26,18,-2 });  
+		AddPointToLine({ 36,19,-17 }); 
+		AddPointToLine({ 30,20,-32 }); 
+		AddPointToLine({ 21,-9,-29 }); 
+		AddPointToLine({ 38,-15,-8 }); 
+		AddPointToLine({ 50,-6,-13 }); 
+		AddPointToLine({ 35,-2,-21 }); 
+		AddPointToLine({ 18,0,-22 });  
+		AddPointToLine({ 16,-13,-25 });
+		AddPointToLine({ 11,-21,-3 }); 
+									   
+		AddPointToLine({ 63,-22,-10 });
+		AddPointToLine({ 28,5,5 });	   
+		AddPointToLine({ 51,5,9 });	   
+		AddPointToLine({ 39,4,-18 });  
+		AddPointToLine({ 19,-1,-12 }); 
+		AddPointToLine({ 24,-24,-15 });
+		AddPointToLine({ 62,-11,-11 });
+		AddPointToLine({ 60,-50,-20 }); //35
 									   
 		//====================		   
 		// 14 -> 9					   
 		//====================		   
-		NewLine();					   
-		AddPointToLine({ 60,-50,-20 });
-		AddPointToLine({ 61,-65,-33 });
-		AddPointToLine({ 24,-41,-2 });
+		//NewLine();					   
+		//AddPointToLine({ 60,-50,-20 });
+		//AddPointToLine({ 61,-65,-33 });
+		//AddPointToLine({ 24,-41,-2 });
+		//
+		//AddPointToLine({ 41,-68,-2 });
+		//AddPointToLine({ 48,-5,6 });
+		//AddPointToLine({ 81,-11,-2 });
 
-		AddPointToLine({ 41,-68,-2 });
-		AddPointToLine({ 48,-5,6 });
-		AddPointToLine({ 81,-11,-2 });
-
-		AddPointToLine({ 52,-26,-28 });
-		AddPointToLine({ 70,-27,-49 });
-		AddPointToLine({ 82,-33,-41 });
-									   
-		AddPointToLine({ 77,-6,-35 }); 
-		AddPointToLine({ 98,-26,-57 });
-		AddPointToLine({ 61,-40,-39 }); 
-
-		AddPointToLine({ 28,2,-39 }); 
-		AddPointToLine({ 56,4,-72 }); 
-		AddPointToLine({ 72,-23,-59 });
-
-		AddPointToLine({ 53,-23,-51 });
-		AddPointToLine({ 107,-88,-53 });
-		AddPointToLine({ 100,-55,-55 });
-									   
-		AddPointToLine({ 84,1,-16 }); 
-		AddPointToLine({ 78,21,-40 }); 
-		AddPointToLine({ 69,5,-56 }); 
-
-		AddPointToLine({ 89,16,-48 }); 
-		AddPointToLine({ 119,51,-53 }); 
-		AddPointToLine({ 69,15,-49 }); 
-									   
-		AddPointToLine({ 23,-24,-50 });
-		AddPointToLine({ 32,95,-64 }); 
-		AddPointToLine({ 24,40,-32 }); 
-									   
-		AddPointToLine({ 36,34,60 });  
-		AddPointToLine({ 28,1,-5 });  
-		AddPointToLine({ 44,64,-26 });
-
-		AddPointToLine({ 47,44,-33 }); 
-		AddPointToLine({ 33,41,-6 }); 
-		AddPointToLine({ 56,48,-54 }); 
-									   
-		AddPointToLine({ 31,22,-57 }); 
-		AddPointToLine({ 26,5,-11 });	   
-		AddPointToLine({ 42,47,-4 });  
-									   
-		AddPointToLine({ 70,24,-58 }); 
-		AddPointToLine({ 35,40,-65 }); 
+		
+		//AddPointToLine({ 52,-26,-28 });
+		//AddPointToLine({ 70,-27,-49 });
+		//AddPointToLine({ 82,-33,-41 });
+		//							   
+		//AddPointToLine({ 77,-6,-35 }); 
+		//AddPointToLine({ 98,-26,-57 });
+		//AddPointToLine({ 61,-40,-39 }); 
+		//
+		
+		//AddPointToLine({ 28,2,-39 }); 
+		//AddPointToLine({ 56,4,-72 }); 
+		//AddPointToLine({ 72,-23,-59 });
+		//
+		//AddPointToLine({ 53,-23,-51 });
+		//AddPointToLine({ 107,-88,-53 });
+		//AddPointToLine({ 100,-55,-55 });
+		//							   
+		//AddPointToLine({ 84,1,-16 }); 
+		//AddPointToLine({ 78,21,-40 }); 
+		//AddPointToLine({ 69,5,-56 }); 
+		//
+		//AddPointToLine({ 89,16,-48 }); 
+		//AddPointToLine({ 119,51,-53 }); 
+		//AddPointToLine({ 69,15,-49 });
+		//
+	
+		//AddPointToLine({ 23,-24,-50 });
+		//AddPointToLine({ 32,95,-64 }); 
+		//AddPointToLine({ 24,40,-32 }); 
+		//							   
+		//AddPointToLine({ 36,34,60 });  
+		//AddPointToLine({ 28,1,-5 });  
+		//AddPointToLine({ 44,64,-26 });
+		//
+		//AddPointToLine({ 47,44,-33 }); 
+		//AddPointToLine({ 33,41,-6 }); 
+		//AddPointToLine({ 56,48,-54 }); 
+		//
+		
+		//AddPointToLine({ 31,22,-57 }); 
+		//AddPointToLine({ 26,5,-11 });	   
+		//AddPointToLine({ 42,47,-4 });  
+		//							   
+		//AddPointToLine({ 70,24,-58 }); 
+		//AddPointToLine({ 35,40,-65 }); 
 
 		//====================
 		// 14 -> 12
