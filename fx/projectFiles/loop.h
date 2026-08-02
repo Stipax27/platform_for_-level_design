@@ -2047,7 +2047,7 @@ namespace Loop
 	{
 		SetHeroParams({
 			.accel = 351,
-			.maxSpeed = 1925,
+			.maxSpeed = 1996,
 			.autoBrake = 65,
 			.axisAngleAccel = 1220,
 			.maxAxisSpeed = 800,
