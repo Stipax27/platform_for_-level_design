@@ -1,4 +1,4 @@
-float distance(const float4& p1, const float4& p2) {
+30float distance(const float4& p1, const float4& p2) {
 	float dx = p2.x - p1.x;
 	float dy = p2.y - p1.y;
 	float dz = p2.z - p1.z;
@@ -872,36 +872,61 @@ namespace Object {
 		NewLine();
 		AddPointToLine({ 0,14,0 });    
 									   
-		AddPointToLine({ 22,0,-39 });  
-		AddPointToLine({ 25,-6,-46 }); 
+		AddPointToLine({ 23,0,-39 });  
+		AddPointToLine({ 11,4,-46 }); 
+		AddPointToLine({ 23,17,-59 }); 
+		AddPointToLine({ 53,9,-40 }); 
+		AddPointToLine({ 44,17,-36 }); 
+		AddPointToLine({ 27,9,-40 }); 
 		AddPointToLine({ 24,-14,-47 });
-									   
-		AddPointToLine({ 26,-17,-31 });
-		AddPointToLine({ 22,-6,-29 }); 
-		AddPointToLine({ 18,-2,-34 }); 
-		AddPointToLine({ 20,-9,-37 }); 
 
 		NewLine();
-		AddPointToLine({ 30,-12,-26 });
+		AddPointToLine({ 26,-16,-31 });
+		AddPointToLine({ 22,-11,-23 }); 
+		AddPointToLine({ 38,-1,-22 }); 
+		AddPointToLine({ 46,10,-29 }); 
+		AddPointToLine({ 35,17,-30 }); 
+		AddPointToLine({ 23,5,-26 }); 
+		AddPointToLine({ 22,-4,-34 }); 
+		AddPointToLine({ 19,-9,-37 }); 
+
+		NewLine();
+		AddPointToLine({ 31,-12,-26 });
 		AddPointToLine({ 39,23,-8 });  
+		AddPointToLine({ 81,18,15 });  
+		AddPointToLine({ 81,18,15 });  
 		AddPointToLine({ 81,18,15 });  
 		AddPointToLine({ 63,-1,4 });   
 		AddPointToLine({ 22,-18,-42 });
+
+		NewLine();
 		AddPointToLine({ 36,-4,-53 }); 
 		AddPointToLine({ 24,-2,-44 }); 
-		AddPointToLine({ 38,-20,-19 });
-		AddPointToLine({ 43,13,19 });  
-		AddPointToLine({ 26,18,-2 });  
+		AddPointToLine({ 38,-14,-19 });
+		AddPointToLine({ 38,-14,-19 });
+		AddPointToLine({ 55,-14,-19 });
+		AddPointToLine({ 39,-13,3 });  
+		AddPointToLine({ 25,18,-2 }); 
+
+		NewLine();
 		AddPointToLine({ 36,19,-17 }); 
 		AddPointToLine({ 30,20,-32 }); 
-		AddPointToLine({ 21,-9,-29 }); 
-		AddPointToLine({ 38,-15,-8 }); 
+		AddPointToLine({ 21,-7,-29 }); 
+		AddPointToLine({ 38,11,-21 }); 
+		AddPointToLine({ 38,11,-21 }); 
+		AddPointToLine({ 38,11,-21 }); 
 		AddPointToLine({ 50,-6,-13 }); 
+
+		NewLine();
 		AddPointToLine({ 35,-2,-21 }); 
 		AddPointToLine({ 18,0,-22 });  
 		AddPointToLine({ 16,-13,-25 });
+		AddPointToLine({ 16,-13,-25 });
+		AddPointToLine({ 16,-13,-25 });
+		AddPointToLine({ 16,-13,-25 });
 		AddPointToLine({ 11,-21,-3 }); 
-									   
+
+		NewLine();
 		AddPointToLine({ 63,-22,-10 });
 		AddPointToLine({ 28,5,5 });	   
 		AddPointToLine({ 51,5,9 });	   
