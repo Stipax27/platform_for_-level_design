@@ -1,4 +1,4 @@
-30float distance(const float4& p1, const float4& p2) {
+float distance(const float4& p1, const float4& p2) {
 	float dx = p2.x - p1.x;
 	float dy = p2.y - p1.y;
 	float dz = p2.z - p1.z;
