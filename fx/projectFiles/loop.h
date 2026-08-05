@@ -494,7 +494,7 @@ struct hero_ {
 			int startLine = rand()% Object::starLineList.lineCount;
 			int startPoint = rand() % (Object::starLineList.line[startLine].pointCount-2)+1;
 
-			startLine = 0;
+			startLine = 7;
 			startPoint = 1;
 
 			float4 destPoint = Object::starLineList.line[startLine].point[startPoint];
@@ -2048,7 +2048,7 @@ namespace Loop
 		SetHeroParams({
 			.accel = 351,
 			.maxSpeed = 1925,
-			.autoBrake = 65,
+			.autoBrake = 10,
 			.axisAngleAccel = 1220,
 			.maxAxisSpeed = 800,
 			.changeDirSpeed = 980,
