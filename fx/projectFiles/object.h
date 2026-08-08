@@ -871,32 +871,61 @@ namespace Object {
 		//===================
 		NewLine();
 		AddPointToLine({ 0,14,0 });
-		AddPointToLine({ 5,-1,-6 });
-		AddPointToLine({ 10,11,-9 });
-		AddPointToLine({ 3,-23,-12 });
-		AddPointToLine({ 12,-27,-18 });
-		AddPointToLine({ 13,-23,-8 });
+		AddPointToLine({ 10,15,-7 });
+		AddPointToLine({ 24,6,-7 });
+		AddPointToLine({ 43,-6,-6 });
+		AddPointToLine({ 60,-50, -20 });
+
+
+		//====================
+		// 1 -> 14(2)
+		//===================
+		NewLine();
+		AddPointToLine({ 0, 14,   0 });
+		// первый виток
+		AddPointToLine({ 4, 19,  -2 });
+		AddPointToLine({ 11, 18,  -6 });
+		AddPointToLine({ 14, 18,  -8 });
+		AddPointToLine({ 16, 14,  -4 });
+		AddPointToLine({ 10,  7,  -3 });
+		AddPointToLine({ 7,  6,  -5 });
+		AddPointToLine({ 8,  8,  -9 });
+		// второй виток
+		AddPointToLine({ 12, 11, -11 });
+		AddPointToLine({ 17, 13,  -9 });
+		AddPointToLine({ 21, 10,  -5 });
+		AddPointToLine({ 22,  6,  -2 });
+		AddPointToLine({ 20,  2,   0 });
+		AddPointToLine({ 16,  1,  -3 });
+		AddPointToLine({ 15,  5,  -7 });
 
 		NewLine();
-		AddPointToLine({ 0,14,0 });
-		AddPointToLine({ 0,14,0 });
-		AddPointToLine({ 0,14,0 });
-		AddPointToLine({ 0,14,0 });
-		AddPointToLine({ 0,14,0 });
-		AddPointToLine({ 0,14,0 });
+		// третий виток
+		AddPointToLine({ 20,  8, -10 });
+		AddPointToLine({ 23, 10,  -7 });
+		AddPointToLine({ 29,  7,  -3 });
+		AddPointToLine({ 30,  3,   1 });
+		AddPointToLine({ 28, -2,   1 });
+		AddPointToLine({ 24, -3,  -3 });
+		AddPointToLine({ 23,  0,  -7 });
+		// четвёртый виток
+		AddPointToLine({ 28,  4, -10 });
+		AddPointToLine({ 33,  6,  -7 });
+		AddPointToLine({ 38,  3,  -3 });
+		AddPointToLine({ 39, -2,   0 });
+		AddPointToLine({ 37, -6,  -1 });
+		AddPointToLine({ 41, -7,  -5 });
+		AddPointToLine({ 46, -5,  -17 });
 
 		NewLine();
-		AddPointToLine({ 0,14,0 });
-		AddPointToLine({ 0,14,0 });
-		AddPointToLine({ 0,14,0 });
-		AddPointToLine({ 0,14,0 });
-		AddPointToLine({ 0,14,0 });
-		AddPointToLine({ 60,-50,-20 });
-		//
-		//// 1 -> 14(2)
-		//NewLine();
-		//AddPointToLine({ 0,14,0 });
-		//AddPointToLine({ 75,-50,-20 });
+		// выход
+		AddPointToLine({ 38, -4, -13 });
+		AddPointToLine({ 44, -2, -12 });
+		AddPointToLine({ 49, -7, -13 });
+		AddPointToLine({ 53,-16, -15 });
+		AddPointToLine({ 55,-27, -17 });
+		AddPointToLine({ 57,-39, -19 });
+		AddPointToLine({ 60,-50, -20 });
 		//
 		// 
 		// 
