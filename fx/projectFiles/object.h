@@ -881,8 +881,6 @@ namespace Object {
 		AddPointToLine({ 5,  7, -4 });
 		AddPointToLine({ 7,  8, -4 });
 		AddPointToLine({ 9,  7, -3 });
-
-		NewLine();
 		AddPointToLine({ 9,  6, -1 });
 		AddPointToLine({ 9,  3, -1 });
 		AddPointToLine({ 8,  2, -3 });
@@ -893,8 +891,6 @@ namespace Object {
 		AddPointToLine({ 14, -2, -3 });
 		AddPointToLine({ 13, -4, -5 });
 		AddPointToLine({ 15, -3, -8 });
-
-		NewLine();
 		AddPointToLine({ 17, -2, -8 });
 		AddPointToLine({ 19, -3, -6 });
 		AddPointToLine({ 20, -5, -4 });
@@ -905,8 +901,6 @@ namespace Object {
 		AddPointToLine({ 25, -8, -8 });
 		AddPointToLine({ 25,-10, -5 });
 		AddPointToLine({ 23,-13, -6 });
-
-		NewLine();
 		AddPointToLine({ 23,-15, -8 });
 		AddPointToLine({ 24,-14,-11 });
 		AddPointToLine({ 27,-13,-11 });
@@ -917,8 +911,6 @@ namespace Object {
 		AddPointToLine({ 29,-19,-13 });
 		AddPointToLine({ 32,-18,-13 });
 		AddPointToLine({ 35,-19,-11 });
-
-		NewLine();
 		AddPointToLine({ 35,-21, -9 });
 		AddPointToLine({ 33,-24, -9 });
 		AddPointToLine({ 33,-25,-12 });
@@ -929,8 +921,6 @@ namespace Object {
 		AddPointToLine({ 39,-29,-11 });
 		AddPointToLine({ 38,-31,-13 });
 		AddPointToLine({ 39,-30,-16 });
-
-		NewLine();
 		AddPointToLine({ 42,-29,-16 });
 		AddPointToLine({ 44,-29,-14 });
 		AddPointToLine({ 45,-32,-12 });
@@ -941,8 +931,6 @@ namespace Object {
 		AddPointToLine({ 49,-35,-16 });
 		AddPointToLine({ 50,-37,-14 });
 		AddPointToLine({ 49,-40,-14 });
-
-		NewLine();
 		AddPointToLine({ 48,-41,-17 });
 		AddPointToLine({ 50,-41,-19 });
 		AddPointToLine({ 52,-40,-19 });
@@ -953,8 +941,6 @@ namespace Object {
 		AddPointToLine({ 55,-46,-20 });
 		AddPointToLine({ 57,-46,-20 });
 		AddPointToLine({ 58,-46,-19 });
-
-		NewLine();
 		AddPointToLine({ 59,-48,-18 });
 		AddPointToLine({ 59,-50,-19 });
 		AddPointToLine({ 60,-50,-20 });
@@ -974,8 +960,6 @@ namespace Object {
 		AddPointToLine({ 7,  8,  0 });
 		AddPointToLine({ 6,  6, -1 });
 		AddPointToLine({ 6,  5, -2 });
-
-		NewLine();
 		AddPointToLine({ 7,  5, -5 });
 		AddPointToLine({ 10,  5, -5 });
 		AddPointToLine({ 12,  5, -3 });
@@ -986,8 +970,6 @@ namespace Object {
 		AddPointToLine({ 15,  0, -7 });
 		AddPointToLine({ 17,  0, -5 });
 		AddPointToLine({ 17, -2, -3 });
-
-		NewLine();
 		AddPointToLine({ 16, -5, -3 });
 		AddPointToLine({ 16, -7, -6 });
 		AddPointToLine({ 17, -6, -8 });
@@ -998,8 +980,6 @@ namespace Object {
 		AddPointToLine({ 20,-12, -7 });
 		AddPointToLine({ 22,-11,-10 });
 		AddPointToLine({ 25,-10,-11 });
-
-		NewLine();
 		AddPointToLine({ 27,-11, -8 });
 		AddPointToLine({ 27,-13, -6 });
 		AddPointToLine({ 26,-16, -6 });
@@ -1010,8 +990,6 @@ namespace Object {
 		AddPointToLine({ 32,-18, -8 });
 		AddPointToLine({ 31,-21, -8 });
 		AddPointToLine({ 30,-23,-11 });
-
-		NewLine();
 		AddPointToLine({ 32,-22,-14 });
 		AddPointToLine({ 35,-21,-14 });
 		AddPointToLine({ 37,-21,-12 });
@@ -1022,8 +1000,6 @@ namespace Object {
 		AddPointToLine({ 40,-26,-15 });
 		AddPointToLine({ 42,-27,-13 });
 		AddPointToLine({ 42,-29,-11 });
-
-		NewLine();
 		AddPointToLine({ 41,-32,-12 });
 		AddPointToLine({ 41,-33,-14 });
 		AddPointToLine({ 42,-33,-17 });
@@ -1034,8 +1010,6 @@ namespace Object {
 		AddPointToLine({ 46,-38,-16 });
 		AddPointToLine({ 47,-38,-18 });
 		AddPointToLine({ 50,-37,-18 });
-
-		NewLine();
 		AddPointToLine({ 52,-38,-17 });
 		AddPointToLine({ 52,-40,-15 });
 		AddPointToLine({ 51,-42,-15 });
@@ -1046,8 +1020,6 @@ namespace Object {
 		AddPointToLine({ 57,-45,-17 });
 		AddPointToLine({ 56,-47,-18 });
 		AddPointToLine({ 57,-48,-19 });
-
-		NewLine();
 		AddPointToLine({ 58,-48,-20 });
 		AddPointToLine({ 59,-49,-20 });
 		AddPointToLine({ 60,-50,-20 });
