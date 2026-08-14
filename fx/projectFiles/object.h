@@ -869,43 +869,25 @@ namespace Object {
 		//====================
 		// 1 -> 14
 		//===================
-		NewLine();
-		AddPointToLine({ 0,14,0 });
-		AddPointToLine({ 4,6,-2 });
-		AddPointToLine({ 10,-11, 8 });
-		AddPointToLine({ 23,-21,  0 });
-
-		NewLine();
-		AddPointToLine({ 0,14,0 });
-		AddPointToLine({ 20,4,  -9 });
-		AddPointToLine({ 24,-7,  -5 });
-		AddPointToLine({ 26,-23,  -8 });
-
-		NewLine();
-		AddPointToLine({ 18,-7,  5 });
-		AddPointToLine({ 24,-29, 14 });
-		AddPointToLine({ 24,-34, 18 });
-		AddPointToLine({ 31,-30, 25 });
-		AddPointToLine({ 46,-23,22 });
-
-		AddPointToLine({ 75,-50,-20 });
+		
 		
 		NewLine();
 		AddPointToLine({ 0,14,0 });
-		AddPointToLine({ 22,-12,-6 });
-		AddPointToLine({ 36,-29,0 });
-		AddPointToLine({ 47,-40,-22 });
-
-		NewLine();
-		AddPointToLine({ 26,-55,7 });
-		AddPointToLine({ 20,-4,10 });
+		AddPointToLine({ 14,3,-21 });
+		AddPointToLine({ 19,-18,-36 });
 		AddPointToLine({ 75,-50,-20 });
-		
 		NewLine();
 		AddPointToLine({ 0,14,0 });
-		AddPointToLine({ 46,-40,-2 });
-		AddPointToLine({ 30,-29,-19 });
-		AddPointToLine({ 75,-50,-20 }); 
+		AddPointToLine({ 21,-16,-1 });
+		AddPointToLine({ 43,5,-19 });
+		AddPointToLine({ 75,-50,-20 });
+		NewLine();
+		AddPointToLine({ 0,14,0 });
+		AddPointToLine({ 49,10,1 });
+		AddPointToLine({ 58,-18,-13 });
+		AddPointToLine({ 75,-50,-20 });
+
+		
 									   
 		//====================		   
 		// 14 -> 9					   
