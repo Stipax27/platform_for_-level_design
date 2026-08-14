@@ -871,42 +871,31 @@ namespace Object {
 		//===================
 		NewLine();
 		AddPointToLine({ 0,14,0 });
-		AddPointToLine({ -15,3,0 });
-
-		AddPointToLine({ -20,-5,  4 });
-		AddPointToLine({ -22,-15, 10 });
-		AddPointToLine({ -18,-30, 14 });
-		AddPointToLine({ 3,-34,  8 });
+		AddPointToLine({ 4,6,-2 });
+		AddPointToLine({ 10,-11, 8 });
+		AddPointToLine({ 23,-21,  0 });
 
 		NewLine();
-		AddPointToLine({ 5,-33, -4 });
-		AddPointToLine({ 12,-24,-12 });
-		AddPointToLine({ 10,-11,-15 });
-		AddPointToLine({ 1,-2,  -9 });
-		AddPointToLine({ -10,-26,  2 });
-		AddPointToLine({ -13,-16, 12 });
-		AddPointToLine({ -7,-28, 20 });
-		AddPointToLine({ 5,-35, 24 });
-		AddPointToLine({ 18,-32, 20 });
-		AddPointToLine({ 27,-4, 12 });
-		AddPointToLine({ 29,-11,  4 });
+		AddPointToLine({ 0,14,0 });
+		AddPointToLine({ 20,4,  -9 });
+		AddPointToLine({ 24,-7,  -5 });
+		AddPointToLine({ 26,-23,  -8 });
+
 		NewLine();
-		AddPointToLine({ 26,-4,  -4 });
-		AddPointToLine({ 20,-2,  -9 });
-		AddPointToLine({ 14,-7,  -5 });
-		AddPointToLine({ 15,-18,  5 });
+		AddPointToLine({ 18,-7,  5 });
 		AddPointToLine({ 24,-29, 14 });
-		AddPointToLine({ 29,-38, 20 });
-		AddPointToLine({ 33,-41, 25 });
-		AddPointToLine({ 37,-50,21 });
+		AddPointToLine({ 24,-34, 18 });
+		AddPointToLine({ 31,-30, 25 });
+		AddPointToLine({ 46,-23,22 });
 
 		AddPointToLine({ 75,-50,-20 });
 		
 		NewLine();
 		AddPointToLine({ 0,14,0 });
-		AddPointToLine({ -10,-38,1 });
-		AddPointToLine({ 51,-31,0 });
-		AddPointToLine({ 37,-28,-25 });
+		AddPointToLine({ 22,-12,-6 });
+		AddPointToLine({ 36,-29,0 });
+		AddPointToLine({ 47,-40,-22 });
+
 		NewLine();
 		AddPointToLine({ 26,-55,7 });
 		AddPointToLine({ 20,-4,10 });
@@ -914,9 +903,9 @@ namespace Object {
 		
 		NewLine();
 		AddPointToLine({ 0,14,0 });
-		AddPointToLine({ 27,13,-2 });
+		AddPointToLine({ 46,-40,-2 });
 		AddPointToLine({ 30,-29,-19 });
-		AddPointToLine({ 75,-50,-20 }); //7
+		AddPointToLine({ 75,-50,-20 }); 
 									   
 		//====================		   
 		// 14 -> 9					   
