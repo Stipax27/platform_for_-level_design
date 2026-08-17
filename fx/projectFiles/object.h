@@ -874,16 +874,19 @@ namespace Object {
 		NewLine();
 		AddPointToLine({ 0,14,0 });
 		AddPointToLine({ 14,3,-21 });
-		AddPointToLine({ 19,-18,-36 });
+		AddPointToLine({ 47,3,-21 });
+		AddPointToLine({ 19,-18,-33 });
 		AddPointToLine({ 75,-50,-20 });
 		NewLine();
 		AddPointToLine({ 0,14,0 });
-		AddPointToLine({ 21,-16,-1 });
-		AddPointToLine({ 43,5,-19 });
+		AddPointToLine({ 43,-15,3 });
+		AddPointToLine({ 23,-25,-35 });
+		AddPointToLine({ 56,-21,-51 });
 		AddPointToLine({ 75,-50,-20 });
 		NewLine();
 		AddPointToLine({ 0,14,0 });
-		AddPointToLine({ 49,10,1 });
+		AddPointToLine({ 23,10,1 });
+		AddPointToLine({ 20,-14,1 });
 		AddPointToLine({ 58,-18,-13 });
 		AddPointToLine({ 75,-50,-20 });
 
