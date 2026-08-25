@@ -494,7 +494,7 @@ struct hero_ {
 			int startLine = rand()% Object::starLineList.lineCount;
 			int startPoint = rand() % (Object::starLineList.line[startLine].pointCount-2)+1;
 
-			startLine = 40;
+			startLine = 0;
 			//startPoint = 300;
 
 			float4 destPoint = Object::starLineList.line[startLine].point[startPoint];

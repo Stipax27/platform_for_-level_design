@@ -869,7 +869,12 @@ namespace Object {
 		// ============================================================
 // À»Õ»ﬂ 1
 // ============================================================
-
+		NewLine();
+		AddPointToLine({ 0,   0,   0 });
+		AddPointToLine({ 7,   0,   -17 });
+		AddPointToLine({ 26,   0,   -29 });
+		AddPointToLine({ 93,   0,   -53 });
+		AddPointToLine({ 154,   0,   -1 });
 // 1A
 
 		NewLine();
