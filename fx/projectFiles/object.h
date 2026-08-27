@@ -912,8 +912,8 @@ namespace Object {
 		AddPointToLine({ 3, -4,  418 });
 		AddPointToLine({ 5, -1,  436 });
 		AddPointToLine({ 5, -1,  459 });
-		AddPointToLine({ 5, -1,  w492 });
-		AddPointToLine({ 39,  11,  462 });
+		AddPointToLine({ 5, 2,  495 });
+		AddPointToLine({ 39,  11,  465 });
 
 		NewLine();
 		AddPointToLine({ 1,  5,  490 });
