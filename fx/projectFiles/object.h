@@ -864,191 +864,233 @@ namespace Object {
 		genSegment(gemini[14], gemini[15]);
 		genSegment(gemini[10], gemini[16]);
 		*/
-		
-		//====================================
+		//============================================================
+// 5 ИЗВИЛИСТЫХ ПОТОКОВ
+// Ось: Z
+// Z: 2000 -> 12000
+// Радиус: ~5
+// Шаг точек: 25
+// Разрывы: ~20
+//============================================================
+
+	
+
+//============================================================
+// 5 ИЗВИЛИСТЫХ ПОТОКОВ
+// Начало: Z = 0
+// Конец:  Z = 10000
+// Радиус: ~5
+// Шаг точек: 25
+// Разрывы: ~20
+//============================================================
+
+
+//============================================================
 // Л1
-//====================================
+//============================================================
 
 		NewLine();
-		AddPointToLine({ 0,   -5, 200 });
-		AddPointToLine({ 9,    0, 225 });
-		AddPointToLine({ 5,    3, 250 });
-		AddPointToLine({ -5,   2, 275 });
-		AddPointToLine({ -9,  -1, 300 });
+		AddPointToLine({ 5,  0,    0 });
+		AddPointToLine({ 4,  2,   25 });
+		AddPointToLine({ 2,  4,   50 });
+		AddPointToLine({ -1,  5,   75 });
+		AddPointToLine({ -4,  3,  100 });
+		AddPointToLine({ -5,  0,  125 });
+		AddPointToLine({ -4, -3,  150 });
+		AddPointToLine({ -1, -5,  175 });
+		AddPointToLine({ 3, -4,  200 });
+		AddPointToLine({ 5, -1,  227 });
 
 		NewLine();
-		AddPointToLine({ -7,  -3, 325 });
-		AddPointToLine({ 2,   -5, 350 });
-		AddPointToLine({ 9,   -1, 375 });
-		AddPointToLine({ 7,    3, 400 });
-		AddPointToLine({ -2,   4, 425 });
+		AddPointToLine({ 5,  2,  245 });
+		AddPointToLine({ 3,  4,  270 });
+		AddPointToLine({ 0,  5,  295 });
+		AddPointToLine({ -3,  4,  322 });
+		AddPointToLine({ -5,  1,  345 });
+		AddPointToLine({ -4, -3,  370 });
+		AddPointToLine({ -1, -5,  387 });
+		AddPointToLine({ 3, -4,  418 });
+		AddPointToLine({ 5, -1,  436 });
+		AddPointToLine({ 5, -1,  459 });
+		AddPointToLine({ 5, -1,  w492 });
+		AddPointToLine({ 39,  11,  462 });
 
 		NewLine();
-		AddPointToLine({ -9,   1, 450 });
-		AddPointToLine({ -6,  -3, 475 });
-		AddPointToLine({ 3,   -5, 500 });
-		AddPointToLine({ 10,  -1, 525 });
-		AddPointToLine({ 5,    3, 550 });
+		AddPointToLine({ 1,  5,  490 });
+		AddPointToLine({ -2,  5,  515 });
+		AddPointToLine({ -4,  3,  540 });
+		AddPointToLine({ -5,  0,  565 });
+		AddPointToLine({ -4, -3,  590 });
+		AddPointToLine({ -1, -5,  615 });
+		AddPointToLine({ 3, -4,  640 });
+		AddPointToLine({ 5, -1,  665 });
+		AddPointToLine({ 5,  2,  691 });
+		AddPointToLine({ 3,  4,  716 });
 
 		NewLine();
-		AddPointToLine({ -5,   3, 575 });
-		AddPointToLine({ -10, -1, 600 });
-		AddPointToLine({ -4,  -4, 625 });
-		AddPointToLine({ 5,   -3, 650 });
-		AddPointToLine({ 10,   1, 675 });
+		AddPointToLine({ 0,  5,  735 });
+		AddPointToLine({ -3,  4,  760 });
+		AddPointToLine({ -5,  1,  785 });
+		AddPointToLine({ -4, -3,  810 });
+		AddPointToLine({ -1, -5,  835 });
+		AddPointToLine({ 3, -4,  860 });
+		AddPointToLine({ 5, -1,  885 });
+		AddPointToLine({ 4,  3,  910 });
+		AddPointToLine({ 1,  5,  933 });
+		AddPointToLine({ -2,  5,  956 });
 
 		NewLine();
-		AddPointToLine({ 3,    4, 700 });
-		AddPointToLine({ -6,   3, 725 });
-		AddPointToLine({ -9,  -2, 750 });
-		AddPointToLine({ 0,   -5, 775 });
-		AddPointToLine({ 9,   -2, 800 });
-
-		NewLine();
-		AddPointToLine({ 7,    3, 825 });
-		AddPointToLine({ -3,   4, 850 });
-		AddPointToLine({ -10,  0, 875 });
-		AddPointToLine({ -6,  -4, 900 });
-		AddPointToLine({ 4,   -4, 925 });
-
-		NewLine();
-		AddPointToLine({ 10,   0, 950 });
-		AddPointToLine({ 5,    3, 975 });
-		AddPointToLine({ -5,   3, 1000 });
-		AddPointToLine({ -9,  -1, 1025 });
-		AddPointToLine({ -2,  -5, 1050 });
-
-		NewLine();
-		AddPointToLine({ 8,   -3, 1075 });
-		AddPointToLine({ 9,    2, 1100 });
-		AddPointToLine({ 0,    4, 1125 });
-		AddPointToLine({ -9,   1, 1150 });
-		AddPointToLine({ -6,  -3, 1175 });
-		AddPointToLine({ 0,   -5, 1200 });
+		AddPointToLine({ -4,  3,  980 });
+		AddPointToLine({ -5,  0, 1005 });
+		AddPointToLine({ -4, -3, 1030 });
+		AddPointToLine({ -1, -5, 1055 });
+		AddPointToLine({ 3, -4, 1080 });
+		AddPointToLine({ 5, -1, 1105 });
+		AddPointToLine({ 5,  2, 1130 });
+		AddPointToLine({ 3,  4, 1155 });
+		AddPointToLine({ 0,  5, 1180 });
+		AddPointToLine({ -3,  4, 1208 });
 
 
-		//====================================
+		//============================================================
 		// Л2
-		//====================================
+		//============================================================
 
 		NewLine();
-		AddPointToLine({ -6,  -1, 215 });
-		AddPointToLine({ -9,   2, 240 });
-		AddPointToLine({ -3,   4, 265 });
-		AddPointToLine({ 6,    1, 290 });
-		AddPointToLine({ 9,   -3, 315 });
+		AddPointToLine({ -2,  5,    0 });
+		AddPointToLine({ -4,  3,   25 });
+		AddPointToLine({ -5,  0,   50 });
+		AddPointToLine({ -4, -3,   75 });
+		AddPointToLine({ -1, -5,  100 });
+		AddPointToLine({ 3, -4,  125 });
+		AddPointToLine({ 5, -1,  150 });
+		AddPointToLine({ 5,  2,  175 });
+		AddPointToLine({ 3,  4,  200 });
+		AddPointToLine({ 0,  5,  225 });
+		AddPointToLine({ -3,  4,  249 });
 
 		NewLine();
-		AddPointToLine({ 6,   -4, 340 });
-		AddPointToLine({ -3,  -4, 365 });
-		AddPointToLine({ -9,   0, 390 });
-		AddPointToLine({ -5,   4, 415 });
-		AddPointToLine({ 5,    3, 440 });
+		AddPointToLine({ -5,  1,  270 });
+		AddPointToLine({ -4, -3,  295 });
+		AddPointToLine({ -1, -5,  320 });
+		AddPointToLine({ 3, -4,  345 });
+		AddPointToLine({ 5, -1,  370 });
+		AddPointToLine({ 4,  3,  395 });
+		AddPointToLine({ 1,  5,  423 });
+		AddPointToLine({ -2,  5,  455 });
+		AddPointToLine({ -4,  3,  476 });
+		AddPointToLine({ -24,  0,  474 });
 
 		NewLine();
-		AddPointToLine({ 10,  -1, 465 });
-		AddPointToLine({ 3,   -4, 490 });
-		AddPointToLine({ -7,  -3, 515 });
-		AddPointToLine({ -8,   2, 540 });
-		AddPointToLine({ 2,    4, 565 });
-
-		NewLine();
-		AddPointToLine({ 9,    1, 590 });
-		AddPointToLine({ -1,  -4, 615 });
-		AddPointToLine({ -10, -1, 640 });
-		AddPointToLine({ -4,   3, 665 });
-		AddPointToLine({ 7,    3, 690 });
-
-		NewLine();
-		AddPointToLine({ 8,   -2, 715 });
-		AddPointToLine({ -3,  -4, 740 });
-		AddPointToLine({ -9,   1, 765 });
-		AddPointToLine({ -4,   4, 790 });
-		AddPointToLine({ 6,    2, 815 });
-
-		NewLine();
-		AddPointToLine({ 9,   -1, 840 });
-		AddPointToLine({ 1,    4, 865 });
-		AddPointToLine({ -8,   2, 890 });
-		AddPointToLine({ -7,  -3, 915 });
-		AddPointToLine({ 4,   -4, 940 });
-
-		NewLine();
-		AddPointToLine({ 10,   0, 965 });
-		AddPointToLine({ 2,    4, 990 });
-		AddPointToLine({ -8,   2, 1015 });
-		AddPointToLine({ -7,  -3, 1040 });
-		AddPointToLine({ 3,   -5, 1065 });
-
-		NewLine();
-		AddPointToLine({ 9,   -2, 1090 });
-		AddPointToLine({ 6,    3, 1115 });
-		AddPointToLine({ -4,   4, 1140 });
-		AddPointToLine({ -10,  0, 1165 });
-		AddPointToLine({ 0,   -5, 1190 });
+		AddPointToLine({ -4, -3,  515 });
+		AddPointToLine({ -1, -5,  540 });
+		AddPointToLine({ 3, -4,  565 });
+		AddPointToLine({ 5, -1,  590 });
+		AddPointToLine({ 5,  2,  615 });
+		AddPointToLine({ 3,  4,  640 });
+		AddPointToLine({ 0,  5,  665 });
+		AddPointToLine({ -3,  4,  690 });
+		AddPointToLine({ -5,  1,  715 });
+		AddPointToLine({ -4, -2,  739 });
 
 
-		//====================================
+		//============================================================
 		// Л3
-		//====================================
+		//============================================================
 
 		NewLine();
-		AddPointToLine({ 6,    1, 230 });
-		AddPointToLine({ 9,   -2, 255 });
-		AddPointToLine({ 3,   -4, 280 });
-		AddPointToLine({ -6,  -1, 305 });
-		AddPointToLine({ -9,   3, 330 });
+		AddPointToLine({ -5, -1,    0 });
+		AddPointToLine({ -4,  3,   25 });
+		AddPointToLine({ -1,  5,   50 });
+		AddPointToLine({ 3,  4,   75 });
+		AddPointToLine({ 5,  1,  100 });
+		AddPointToLine({ 4, -3,  125 });
+		AddPointToLine({ 1, -5,  150 });
+		AddPointToLine({ -2, -5,  175 });
+		AddPointToLine({ -4, -3,  200 });
+		AddPointToLine({ -5,  0,  225 });
 
 		NewLine();
-		AddPointToLine({ -2,   4, 355 });
-		AddPointToLine({ 8,    2, 380 });
-		AddPointToLine({ 7,   -3, 405 });
-		AddPointToLine({ -3,  -4, 430 });
-		AddPointToLine({ -10,  0, 455 });
+		AddPointToLine({ -4,  3,  248 });
+		AddPointToLine({ -1,  5,  275 });
+		AddPointToLine({ 3,  4,  300 });
+		AddPointToLine({ 5,  1,  325 });
+		AddPointToLine({ 4, -3,  350 });
+		AddPointToLine({ 1, -5,  375 });
+		AddPointToLine({ -2, -5,  400 });
+		AddPointToLine({ -4, -3,  425 });
+		AddPointToLine({ -5,  0,  450 });
+		AddPointToLine({ -4,  3,  476 });
 
 		NewLine();
-		AddPointToLine({ -4,   3, 480 });
-		AddPointToLine({ 6,    3, 505 });
-		AddPointToLine({ 9,   -2, 530 });
-		AddPointToLine({ 1,   -5, 555 });
-		AddPointToLine({ -9,  -1, 580 });
+		AddPointToLine({ -1,  5,  495 });
+		AddPointToLine({ 3,  4,  520 });
+		AddPointToLine({ 5,  1,  545 });
+		AddPointToLine({ 4, -3,  570 });
+		AddPointToLine({ 1, -5,  595 });
+		AddPointToLine({ -2, -5,  620 });
+		AddPointToLine({ -4, -3,  645 });
+		AddPointToLine({ -5,  0,  670 });
+		AddPointToLine({ -4,  3,  695 });
+		AddPointToLine({ -1,  5,  723 });
+
+
+		//============================================================
+		// Л4
+		//============================================================
 
 		NewLine();
-		AddPointToLine({ -7,   3, 605 });
-		AddPointToLine({ 3,    4, 630 });
-		AddPointToLine({ 10,   0, 655 });
-		AddPointToLine({ 4,   -4, 680 });
-		AddPointToLine({ -7,  -3, 705 });
+		AddPointToLine({ 3, -4,    0 });
+		AddPointToLine({ 5, -1,   25 });
+		AddPointToLine({ 5,  2,   50 });
+		AddPointToLine({ 3,  4,   75 });
+		AddPointToLine({ 0,  5,  100 });
+		AddPointToLine({ -3,  4,  125 });
+		AddPointToLine({ -5,  1,  150 });
+		AddPointToLine({ -4, -3,  175 });
+		AddPointToLine({ -1, -5,  200 });
+		AddPointToLine({ 3, -4,  225 });
 
 		NewLine();
-		AddPointToLine({ -9,   1, 730 });
-		AddPointToLine({ 0,    4, 755 });
-		AddPointToLine({ 9,    1, 780 });
-		AddPointToLine({ 6,   -3, 805 });
-		AddPointToLine({ -4,  -4, 830 });
+		AddPointToLine({ 5, -1,  245 });
+		AddPointToLine({ 4,  3,  270 });
+		AddPointToLine({ 1,  5,  295 });
+		AddPointToLine({ -2,  5,  320 });
+		AddPointToLine({ -4,  3,  345 });
+		AddPointToLine({ -5,  0,  370 });
+		AddPointToLine({ -4, -3,  395 });
+		AddPointToLine({ -1, -5,  420 });
+		AddPointToLine({ 3, -4,  445 });
+		AddPointToLine({ 5, -1,  470 });
+
+
+		//============================================================
+		// Л5
+		//============================================================
 
 		NewLine();
-		AddPointToLine({ -10, -1, 855 });
-		AddPointToLine({ -2,   4, 880 });
-		AddPointToLine({ 8,    2, 905 });
-		AddPointToLine({ 8,   -3, 930 });
-		AddPointToLine({ -1,  -5, 955 });
+		AddPointToLine({ -3,  4,    0 });
+		AddPointToLine({ -5,  1,   25 });
+		AddPointToLine({ -4, -3,   50 });
+		AddPointToLine({ -1, -5,   75 });
+		AddPointToLine({ 3, -4,  100 });
+		AddPointToLine({ 5, -1,  125 });
+		AddPointToLine({ 5,  2,  150 });
+		AddPointToLine({ 3,  4,  175 });
+		AddPointToLine({ 0,  5,  200 });
+		AddPointToLine({ -3,  4,  225 });
 
 		NewLine();
-		AddPointToLine({ -9,  -1, 980 });
-		AddPointToLine({ -5,   3, 1005 });
-		AddPointToLine({ 6,    3, 1030 });
-		AddPointToLine({ 10,  -1, 1055 });
-		AddPointToLine({ 2,   -5, 1080 });
-
-		NewLine();
-		AddPointToLine({ -8,  -2, 1105 });
-		AddPointToLine({ -7,   3, 1130 });
-		AddPointToLine({ 4,    4, 1155 });
-		AddPointToLine({ 9,    0, 1180 });
-		AddPointToLine({ 0,   -5, 1200 });
-
-
+		AddPointToLine({ -5,  1, 245 });
+		AddPointToLine({ -4, -3, 270 });
+		AddPointToLine({ -1, -5, 295 });
+		AddPointToLine({ 3, -4, 320 });
+		AddPointToLine({ 5, -1, 345 });
+		AddPointToLine({ 4,  3, 370 });
+		AddPointToLine({ 1,  5, 395 });
+		AddPointToLine({ -2,  5, 420 });
+		AddPointToLine({ -4,  3, 445 });
+		AddPointToLine({ -5,  0, 470 });
 		/*for (int i = 0; i < starsCount; i++)
 		{
 			// Начинаем с i + 1, чтобы не проверять i==j и не дублировать пары (j,i)
