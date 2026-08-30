@@ -1,4 +1,4 @@
-float distance(const float4& p1, const float4& p2) {
+п»їfloat distance(const float4& p1, const float4& p2) {
 	float dx = p2.x - p1.x;
 	float dy = p2.y - p1.y;
 	float dz = p2.z - p1.z;
@@ -11,7 +11,7 @@ float4 lerp3(const float4& a, const float4& b, float t) {
 		a.x + t * (b.x - a.x),
 		a.y + t * (b.y - a.y),
 		a.z + t * (b.z - a.z),
-		a.w // Сохраняем оригинальное значение w из первой точки
+		a.w // РЎРѕС…СЂР°РЅСЏРµРј РѕСЂРёРіРёРЅР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ w РёР· РїРµСЂРІРѕР№ С‚РѕС‡РєРё
 	};
 }
 
@@ -20,20 +20,20 @@ float frac(float x) {
 }
 
 float4 normalize(const float4& v) {
-	// Считаем длину вектора по формуле Пифагора
+	// РЎС‡РёС‚Р°РµРј РґР»РёРЅСѓ РІРµРєС‚РѕСЂР° РїРѕ С„РѕСЂРјСѓР»Рµ РџРёС„Р°РіРѕСЂР°
 	float length = std::sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
 
-	// Защита от деления на ноль (если вектор нулевой)
+	// Р—Р°С‰РёС‚Р° РѕС‚ РґРµР»РµРЅРёСЏ РЅР° РЅРѕР»СЊ (РµСЃР»Рё РІРµРєС‚РѕСЂ РЅСѓР»РµРІРѕР№)
 	if (length < 0.00001f) {
 		return float4{ 0.0f, 0.0f, 0.0f, v.w };
 	}
 
-	// Возвращаем нормализованный вектор
+	// Р’РѕР·РІСЂР°С‰Р°РµРј РЅРѕСЂРјР°Р»РёР·РѕРІР°РЅРЅС‹Р№ РІРµРєС‚РѕСЂ
 	return float4{
 		v.x / length,
 		v.y / length,
 		v.z / length,
-		v.w // Поле w оставляем оригинальным
+		v.w // РџРѕР»Рµ w РѕСЃС‚Р°РІР»СЏРµРј РѕСЂРёРіРёРЅР°Р»СЊРЅС‹Рј
 	};
 }
 
@@ -42,7 +42,7 @@ float4 cross(const float4& a, const float4& b) {
 		a.y * b.z - a.z * b.y,
 		a.z * b.x - a.x * b.z,
 		a.x * b.y - a.y * b.x,
-		0.0f // Для векторов направления w обычно равен 0
+		0.0f // Р”Р»СЏ РІРµРєС‚РѕСЂРѕРІ РЅР°РїСЂР°РІР»РµРЅРёСЏ w РѕР±С‹С‡РЅРѕ СЂР°РІРµРЅ 0
 	};
 }
 
@@ -513,25 +513,25 @@ namespace Object {
 		psModeSet(in.mode);
 
 		XMMATRIX invViewMatrix = XMMatrixInverse(nullptr, XMMatrixTranspose(ConstBuf::camera.view[0]));
-		// Позиция камеры находится в 4-й строке инвертированной матрицы (вектор смещения)
+		// РџРѕР·РёС†РёСЏ РєР°РјРµСЂС‹ РЅР°С…РѕРґРёС‚СЃСЏ РІ 4-Р№ СЃС‚СЂРѕРєРµ РёРЅРІРµСЂС‚РёСЂРѕРІР°РЅРЅРѕР№ РјР°С‚СЂРёС†С‹ (РІРµРєС‚РѕСЂ СЃРјРµС‰РµРЅРёСЏ)
 		XMVECTOR cameraPos = invViewMatrix.r[3];
-		// Если нужно получить отдельные float:
+		// Р•СЃР»Рё РЅСѓР¶РЅРѕ РїРѕР»СѓС‡РёС‚СЊ РѕС‚РґРµР»СЊРЅС‹Рµ float:
 		XMFLOAT3 eye;
 		XMStoreFloat3(&eye, cameraPos);
 
 		XMVECTOR cameraLookAtVec = XMVector3Normalize(invViewMatrix.r[2]);
 
-		// Сохраняем в структуру XMFLOAT3 для передачи в Shader Constants / Constant Buffer
+		// РЎРѕС…СЂР°РЅСЏРµРј РІ СЃС‚СЂСѓРєС‚СѓСЂСѓ XMFLOAT3 РґР»СЏ РїРµСЂРµРґР°С‡Рё РІ Shader Constants / Constant Buffer
 		XMFLOAT3 cameraForward;
 		XMStoreFloat3(&cameraForward, cameraLookAtVec);
 
-		// 1. Извлекаем и нормализуем вектор Right (1-я строка инвертированной матрицы)
+		// 1. РР·РІР»РµРєР°РµРј Рё РЅРѕСЂРјР°Р»РёР·СѓРµРј РІРµРєС‚РѕСЂ Right (1-СЏ СЃС‚СЂРѕРєР° РёРЅРІРµСЂС‚РёСЂРѕРІР°РЅРЅРѕР№ РјР°С‚СЂРёС†С‹)
 		XMVECTOR cameraRightVec = XMVector3Normalize(invViewMatrix.r[0]);
 
-		// 2. Извлекаем и нормализуем вектор Up (2-я строка инвертированной матрицы)
+		// 2. РР·РІР»РµРєР°РµРј Рё РЅРѕСЂРјР°Р»РёР·СѓРµРј РІРµРєС‚РѕСЂ Up (2-СЏ СЃС‚СЂРѕРєР° РёРЅРІРµСЂС‚РёСЂРѕРІР°РЅРЅРѕР№ РјР°С‚СЂРёС†С‹)
 		XMVECTOR cameraUpVec = XMVector3Normalize(invViewMatrix.r[1]);
 
-		// Сохраняем в структуры XMFLOAT3 для передачи в ваш Constant Buffer
+		// РЎРѕС…СЂР°РЅСЏРµРј РІ СЃС‚СЂСѓРєС‚СѓСЂС‹ XMFLOAT3 РґР»СЏ РїРµСЂРµРґР°С‡Рё РІ РІР°С€ Constant Buffer
 		XMFLOAT3 cameraRight;
 		XMStoreFloat3(&cameraRight, cameraRightVec);
 
@@ -610,7 +610,7 @@ namespace Object {
 
 
 	void smoothStarline(starline& line) {
-		line.pointCount = 0; // Сбрасываем старый результат сглаживания
+		line.pointCount = 0; // РЎР±СЂР°СЃС‹РІР°РµРј СЃС‚Р°СЂС‹Р№ СЂРµР·СѓР»СЊС‚Р°С‚ СЃРіР»Р°Р¶РёРІР°РЅРёСЏ
 
 		float totalLength = 0;
 		for (int i = 0; i < line.basePointCount-1; i++)
@@ -621,9 +621,9 @@ namespace Object {
 		int stepsPerSegment = totalLength/25.;
 		if (stepsPerSegment < 2) stepsPerSegment = 2;
 
-		// Если исходных точек недостаточно для сглаживания или шаг некорректен
+		// Р•СЃР»Рё РёСЃС…РѕРґРЅС‹С… С‚РѕС‡РµРє РЅРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РґР»СЏ СЃРіР»Р°Р¶РёРІР°РЅРёСЏ РёР»Рё С€Р°Рі РЅРµРєРѕСЂСЂРµРєС‚РµРЅ
 		if (line.basePointCount < 2 || stepsPerSegment <= 0) {
-			// Просто копируем исходные точки в результирующий массив
+			// РџСЂРѕСЃС‚Рѕ РєРѕРїРёСЂСѓРµРј РёСЃС…РѕРґРЅС‹Рµ С‚РѕС‡РєРё РІ СЂРµР·СѓР»СЊС‚РёСЂСѓСЋС‰РёР№ РјР°СЃСЃРёРІ
 			int limit = (line.basePointCount > smoothPointMAX) ? smoothPointMAX : line.basePointCount;
 			for (int i = 0; i < limit; ++i) {
 				line.point[i] = line.basePoint[i];
@@ -632,17 +632,17 @@ namespace Object {
 			return;
 		}
 
-		// Проходим по сегментам между исходными точками basePoint
+		// РџСЂРѕС…РѕРґРёРј РїРѕ СЃРµРіРјРµРЅС‚Р°Рј РјРµР¶РґСѓ РёСЃС…РѕРґРЅС‹РјРё С‚РѕС‡РєР°РјРё basePoint
 		for (int i = 0; i < line.basePointCount - 1; ++i) {
-			// Формируем 4 опорные точки для Кэтмулла-Рома (с виртуальным продлением на краях)
+			// Р¤РѕСЂРјРёСЂСѓРµРј 4 РѕРїРѕСЂРЅС‹Рµ С‚РѕС‡РєРё РґР»СЏ РљСЌС‚РјСѓР»Р»Р°-Р РѕРјР° (СЃ РІРёСЂС‚СѓР°Р»СЊРЅС‹Рј РїСЂРѕРґР»РµРЅРёРµРј РЅР° РєСЂР°СЏС…)
 			float4 p0 = (i == 0) ? line.basePoint[i] : line.basePoint[i - 1];
 			float4 p1 = line.basePoint[i];
 			float4 p2 = line.basePoint[i + 1];
 			float4 p3 = (i == line.basePointCount - 2) ? line.basePoint[i + 1] : line.basePoint[i + 2];
 
-			// Генерируем промежуточные точки внутри текущего сегмента
+			// Р“РµРЅРµСЂРёСЂСѓРµРј РїСЂРѕРјРµР¶СѓС‚РѕС‡РЅС‹Рµ С‚РѕС‡РєРё РІРЅСѓС‚СЂРё С‚РµРєСѓС‰РµРіРѕ СЃРµРіРјРµРЅС‚Р°
 			for (int step = 0; step < stepsPerSegment; ++step) {
-				// Защита от переполнения жестко ограниченного массива point[100]
+				// Р—Р°С‰РёС‚Р° РѕС‚ РїРµСЂРµРїРѕР»РЅРµРЅРёСЏ Р¶РµСЃС‚РєРѕ РѕРіСЂР°РЅРёС‡РµРЅРЅРѕРіРѕ РјР°СЃСЃРёРІР° point[100]
 				if (line.pointCount >= smoothPointMAX) {
 					return;
 				}
@@ -653,7 +653,7 @@ namespace Object {
 			}
 		}
 
-		// Добавляем финальную опорную точку, чтобы линия завершилась корректно
+		// Р”РѕР±Р°РІР»СЏРµРј С„РёРЅР°Р»СЊРЅСѓСЋ РѕРїРѕСЂРЅСѓСЋ С‚РѕС‡РєСѓ, С‡С‚РѕР±С‹ Р»РёРЅРёСЏ Р·Р°РІРµСЂС€РёР»Р°СЃСЊ РєРѕСЂСЂРµРєС‚РЅРѕ
 		if (line.pointCount < smoothPointMAX) {
 			line.point[line.pointCount] = line.basePoint[line.basePointCount - 1];
 			line.pointCount++;
@@ -663,14 +663,14 @@ namespace Object {
 	
 
 	void Starline(starline& line, int stepsPerSegment) {
-		line.pointCount = 0; // Сбрасываем старый результат сглаживания
+		line.pointCount = 0; // РЎР±СЂР°СЃС‹РІР°РµРј СЃС‚Р°СЂС‹Р№ СЂРµР·СѓР»СЊС‚Р°С‚ СЃРіР»Р°Р¶РёРІР°РЅРёСЏ
 
-		// Проходим по сегментам между исходными точками basePoint
+		// РџСЂРѕС…РѕРґРёРј РїРѕ СЃРµРіРјРµРЅС‚Р°Рј РјРµР¶РґСѓ РёСЃС…РѕРґРЅС‹РјРё С‚РѕС‡РєР°РјРё basePoint
 		for (int i = 0; i < line.basePointCount - 1; ++i) {
 
-			// Генерируем промежуточные точки внутри текущего сегмента
+			// Р“РµРЅРµСЂРёСЂСѓРµРј РїСЂРѕРјРµР¶СѓС‚РѕС‡РЅС‹Рµ С‚РѕС‡РєРё РІРЅСѓС‚СЂРё С‚РµРєСѓС‰РµРіРѕ СЃРµРіРјРµРЅС‚Р°
 			for (int step = 0; step < stepsPerSegment; ++step) {
-				// Защита от переполнения жестко ограниченного массива point[100]
+				// Р—Р°С‰РёС‚Р° РѕС‚ РїРµСЂРµРїРѕР»РЅРµРЅРёСЏ Р¶РµСЃС‚РєРѕ РѕРіСЂР°РЅРёС‡РµРЅРЅРѕРіРѕ РјР°СЃСЃРёРІР° point[100]
 				if (line.pointCount >= smoothPointMAX) {
 					return;
 				}
@@ -681,7 +681,7 @@ namespace Object {
 			}
 		}
 
-		// Добавляем финальную опорную точку, чтобы линия завершилась корректно
+		// Р”РѕР±Р°РІР»СЏРµРј С„РёРЅР°Р»СЊРЅСѓСЋ РѕРїРѕСЂРЅСѓСЋ С‚РѕС‡РєСѓ, С‡С‚РѕР±С‹ Р»РёРЅРёСЏ Р·Р°РІРµСЂС€РёР»Р°СЃСЊ РєРѕСЂСЂРµРєС‚РЅРѕ
 		if (line.pointCount < smoothPointMAX) {
 			line.point[line.pointCount] = line.basePoint[line.basePointCount - 1];
 			line.pointCount++;
@@ -689,17 +689,17 @@ namespace Object {
 	}
 
 
-	// Функция плавной интерполяции (Smoothstep / Fade)
+	// Р¤СѓРЅРєС†РёСЏ РїР»Р°РІРЅРѕР№ РёРЅС‚РµСЂРїРѕР»СЏС†РёРё (Smoothstep / Fade)
 	inline float perlin_fade(float t) {
 		return t * t * t * (t * (t * 6.0f - 15.0f) + 10.0f);
 	}
 
-	// Линейная интерполяция
+	// Р›РёРЅРµР№РЅР°СЏ РёРЅС‚РµСЂРїРѕР»СЏС†РёСЏ
 	inline float perlin_lerp(float t, float a, float b) {
 		return a + t * (b - a);
 	}
 
-	// Вычисление скалярного произведения с градиентным вектором
+	// Р’С‹С‡РёСЃР»РµРЅРёРµ СЃРєР°Р»СЏСЂРЅРѕРіРѕ РїСЂРѕРёР·РІРµРґРµРЅРёСЏ СЃ РіСЂР°РґРёРµРЅС‚РЅС‹Рј РІРµРєС‚РѕСЂРѕРј
 	inline float perlin_grad(int hash, float x, float y, float z) {
 		int h = hash & 15;
 		float u = h < 8 ? x : y;
@@ -707,9 +707,9 @@ namespace Object {
 		return ((h & 1) == 0 ? u : -u) + ((h & 2) == 0 ? v : -v);
 	}
 
-	// Вспомогательная функция для получения одного скалярного значения шума
+	// Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅР°СЏ С„СѓРЅРєС†РёСЏ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РѕРґРЅРѕРіРѕ СЃРєР°Р»СЏСЂРЅРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ С€СѓРјР°
 	float GetSinglePerlinNoise3D(float x, float y, float z) {
-		// Таблица перестановок Перлина (повторена дважды, чтобы избежать выхода за границы при +1)
+		// РўР°Р±Р»РёС†Р° РїРµСЂРµСЃС‚Р°РЅРѕРІРѕРє РџРµСЂР»РёРЅР° (РїРѕРІС‚РѕСЂРµРЅР° РґРІР°Р¶РґС‹, С‡С‚РѕР±С‹ РёР·Р±РµР¶Р°С‚СЊ РІС‹С…РѕРґР° Р·Р° РіСЂР°РЅРёС†С‹ РїСЂРё +1)
 		static const int p[512] = {
 			151,160,137,91,90,15,131,13,201,95,96,53,194,233,7,225,140,36,103,30,69,142,8,99,37,240,21,10,23,
 			190,6,148,247,120,234,75,0,26,56,62,94,252,219,203,117,35,11,32,57,177,33,88,237,149,56,87,174,20,
@@ -721,7 +721,7 @@ namespace Object {
 			251,34,242,193,238,210,144,12,191,179,162,241,81,51,145,235,249,14,239,107,49,192,214,31,181,199,106,
 			157,184,84,204,176,115,121,50,45,127,4,150,254,138,236,205,93,222,114,67,29,24,72,243,141,128,195,78,
 			66,215,61,156,180,
-			// Повторение массива
+			// РџРѕРІС‚РѕСЂРµРЅРёРµ РјР°СЃСЃРёРІР°
 			151,160,137,91,90,15,131,13,201,95,96,53,194,233,7,225,140,36,103,30,69,142,8,99,37,240,21,10,23,
 			190,6,148,247,120,234,75,0,26,56,62,94,252,219,203,117,35,11,32,57,177,33,88,237,149,56,87,174,20,
 			125,136,171,168,68,175,74,165,71,134,139,48,27,166,77,146,158,231,83,111,229,122,60,211,133,230,220,
@@ -763,14 +763,14 @@ namespace Object {
 					perlin_grad(p[BB + 1], x - 1, y - 1, z - 1))));
 	}
 
-	// Целевая функция, принимающая три аргумента и возвращающая XMVECTOR
+	// Р¦РµР»РµРІР°СЏ С„СѓРЅРєС†РёСЏ, РїСЂРёРЅРёРјР°СЋС‰Р°СЏ С‚СЂРё Р°СЂРіСѓРјРµРЅС‚Р° Рё РІРѕР·РІСЂР°С‰Р°СЋС‰Р°СЏ XMVECTOR
 	XMVECTOR GetPerlinNoiseVector3(float x, float y, float z) {
-		// Смещаем координаты для каждого канала, чтобы значения X, Y и Z не дублировали друг друга
+		// РЎРјРµС‰Р°РµРј РєРѕРѕСЂРґРёРЅР°С‚С‹ РґР»СЏ РєР°Р¶РґРѕРіРѕ РєР°РЅР°Р»Р°, С‡С‚РѕР±С‹ Р·РЅР°С‡РµРЅРёСЏ X, Y Рё Z РЅРµ РґСѓР±Р»РёСЂРѕРІР°Р»Рё РґСЂСѓРі РґСЂСѓРіР°
 		float nx = GetSinglePerlinNoise3D(x, y, z);
 		float ny = GetSinglePerlinNoise3D(x + 31.415f, y + 58.271f, z + 93.123f);
 		float nz = GetSinglePerlinNoise3D(x + 115.53f, y + 213.91f, z + 351.67f);
 
-		// Возвращаем упакованный в SIMD-регистр вектор (компонента W = 0.0f)
+		// Р’РѕР·РІСЂР°С‰Р°РµРј СѓРїР°РєРѕРІР°РЅРЅС‹Р№ РІ SIMD-СЂРµРіРёСЃС‚СЂ РІРµРєС‚РѕСЂ (РєРѕРјРїРѕРЅРµРЅС‚Р° W = 0.0f)
 		return XMVectorSet(nx, ny, nz, 0.0f);
 	}
 
@@ -820,7 +820,7 @@ namespace Object {
 			p.y += getRandFloat() * rs;
 			p.z += getRandFloat() * rs;
 
-			// Масштабируем координаты точек для игрового мира
+			// РњР°СЃС€С‚Р°Р±РёСЂСѓРµРј РєРѕРѕСЂРґРёРЅР°С‚С‹ С‚РѕС‡РµРє РґР»СЏ РёРіСЂРѕРІРѕРіРѕ РјРёСЂР°
 			float scale = 600;
 			p.x *= scale;
 			p.y *= scale;
@@ -866,664 +866,270 @@ namespace Object {
 		*/
 		
 
-		// Центр трубы: X = 0, Y = 0.
-		// Стандарт: Линия 30, Разрыв 60 (Цикл 90)
-		// Аномалия (Л1, Л5, Л9): Линия 60, Разрыв 30 (Цикл 90)
+		// Р¦РµРЅС‚СЂ С‚СЂСѓР±С‹: X = 0, Y = 0.
+		// РЎС‚Р°РЅРґР°СЂС‚: Р›РёРЅРёСЏ 30, Р Р°Р·СЂС‹РІ 60 (Р¦РёРєР» 90)
+		// РђРЅРѕРјР°Р»РёСЏ (Р›1, Р›5, Р›9): Р›РёРЅРёСЏ 60, Р Р°Р·СЂС‹РІ 30 (Р¦РёРєР» 90)
 
 		// ==========================================
-		// Л1 — 0° (Аномалия: Л=60, Р=30)
-		// Смещение: 0
+		// Р›1 вЂ” 0В° (РђРЅРѕРјР°Р»РёСЏ: Р›=60, Р =30)
+		// РЎРјРµС‰РµРЅРёРµ: 0
 		// ==========================================
-		// Центр трубы: X = 0, Y = 0.
-// Продольная ось трубы: Z.
-// Радиус: 5.
-// Каждый существующий сегмент дополнительно разбит промежуточными точками.
-
-// Центр трубы: X = 0, Z = 0
-// Направление трубы: Y
-// Промежуточные точки: шаг 10
-
-// ==========================================
-// Л1 — 0°
-// ==========================================
-
-		NewLine();
-		AddPointToLine({ 5, -300,  0 });
-		AddPointToLine({ 5, -290,  0 });
-		AddPointToLine({ 5, -280,  0 });
-		AddPointToLine({ 5, -270,  0 });
-		AddPointToLine({ 5, -260,  0 });
-		AddPointToLine({ 5, -250,  0 });
-		AddPointToLine({ 5, -240,  0 });
-
-		NewLine();
-		AddPointToLine({ 5, -210,  0 });
-		AddPointToLine({ 5, -200,  0 });
-		AddPointToLine({ 5, -190,  0 });
-		AddPointToLine({ 5, -180,  0 });
-		AddPointToLine({ 5, -170,  0 });
-		AddPointToLine({ 5, -160,  0 });
-		AddPointToLine({ 5, -150,  0 });
-
-		NewLine();
-		AddPointToLine({ 5, -120,  0 });
-		AddPointToLine({ 5, -110,  0 });
-		AddPointToLine({ 5, -100,  0 });
-		AddPointToLine({ 5,  -90,  0 });
-		AddPointToLine({ 5,  -80,  0 });
-		AddPointToLine({ 5,  -70,  0 });
-		AddPointToLine({ 5,  -60,  0 });
-
-		NewLine();
-		AddPointToLine({ 5,  -30,  0 });
-		AddPointToLine({ 5,  -20,  0 });
-		AddPointToLine({ 5,  -10,  0 });
-		AddPointToLine({ 5,    0,  0 });
-		AddPointToLine({ 5,   10,  0 });
-		AddPointToLine({ 5,   20,  0 });
-		AddPointToLine({ 5,   30,  0 });
-
-		NewLine();
-		AddPointToLine({ 5,   60,  0 });
-		AddPointToLine({ 5,   70,  0 });
-		AddPointToLine({ 5,   80,  0 });
-		AddPointToLine({ 5,   90,  0 });
-		AddPointToLine({ 5,  100,  0 });
-		AddPointToLine({ 5,  110,  0 });
-		AddPointToLine({ 5,  120,  0 });
-
-		NewLine();
-		AddPointToLine({ 5,  150,  0 });
-		AddPointToLine({ 5,  160,  0 });
-		AddPointToLine({ 5,  170,  0 });
-		AddPointToLine({ 5,  180,  0 });
-		AddPointToLine({ 5,  190,  0 });
-		AddPointToLine({ 5,  200,  0 });
-		AddPointToLine({ 5,  210,  0 });
-
-		NewLine();
-		AddPointToLine({ 5,  240,  0 });
-		AddPointToLine({ 5,  250,  0 });
-		AddPointToLine({ 5,  260,  0 });
-		AddPointToLine({ 5,  270,  0 });
-		AddPointToLine({ 5,  280,  0 });
-		AddPointToLine({ 5,  290,  0 });
-		AddPointToLine({ 5,  300,  0 });
-
-
-		// ==========================================
-		// Л2 — 30°
-		// ==========================================
-
-		NewLine();
-		AddPointToLine({ 4, -300,  3 });
-		AddPointToLine({ 4, -290,  3 });
-		AddPointToLine({ 4, -280,  3 });
-		AddPointToLine({ 4, -270,  3 });
-
-		NewLine();
-		AddPointToLine({ 4, -210,  3 });
-		AddPointToLine({ 4, -200,  3 });
-		AddPointToLine({ 4, -190,  3 });
-		AddPointToLine({ 4, -180,  3 });
-
-		NewLine();
-		AddPointToLine({ 4, -120,  3 });
-		AddPointToLine({ 4, -110,  3 });
-		AddPointToLine({ 4, -100,  3 });
-		AddPointToLine({ 4,  -90,  3 });
-
-		NewLine();
-		AddPointToLine({ 4,  -30,  3 });
-		AddPointToLine({ 4,  -20,  3 });
-		AddPointToLine({ 4,  -10,  3 });
-		AddPointToLine({ 4,    0,  3 });
-
-		NewLine();
-		AddPointToLine({ 4,   60,  3 });
-		AddPointToLine({ 4,   70,  3 });
-		AddPointToLine({ 4,   80,  3 });
-		AddPointToLine({ 4,   90,  3 });
-
-		NewLine();
-		AddPointToLine({ 4,  150,  3 });
-		AddPointToLine({ 4,  160,  3 });
-		AddPointToLine({ 4,  170,  3 });
-		AddPointToLine({ 4,  180,  3 });
-
-		NewLine();
-		AddPointToLine({ 4,  240,  3 });
-		AddPointToLine({ 4,  250,  3 });
-		AddPointToLine({ 4,  260,  3 });
-		AddPointToLine({ 4,  270,  3 });
-
-
-		// ==========================================
-		// Л3 — 60°
-		// ==========================================
-
-		NewLine();
-		AddPointToLine({ 3, -240,  4 });
-		AddPointToLine({ 3, -230,  4 });
-		AddPointToLine({ 3, -220,  4 });
-		AddPointToLine({ 3, -210,  4 });
-
-		NewLine();
-		AddPointToLine({ 3, -150,  4 });
-		AddPointToLine({ 3, -140,  4 });
-		AddPointToLine({ 3, -130,  4 });
-		AddPointToLine({ 3, -120,  4 });
-
-		NewLine();
-		AddPointToLine({ 3,  -60,  4 });
-		AddPointToLine({ 3,  -50,  4 });
-		AddPointToLine({ 3,  -40,  4 });
-		AddPointToLine({ 3,  -30,  4 });
-
-		NewLine();
-		AddPointToLine({ 3,   30,  4 });
-		AddPointToLine({ 3,   40,  4 });
-		AddPointToLine({ 3,   50,  4 });
-		AddPointToLine({ 3,   60,  4 });
-
-		NewLine();
-		AddPointToLine({ 3,  120,  4 });
-		AddPointToLine({ 3,  130,  4 });
-		AddPointToLine({ 3,  140,  4 });
-		AddPointToLine({ 3,  150,  4 });
-
-		NewLine();
-		AddPointToLine({ 3,  210,  4 });
-		AddPointToLine({ 3,  220,  4 });
-		AddPointToLine({ 3,  230,  4 });
-		AddPointToLine({ 3,  240,  4 });
-
-
-		// ==========================================
-		// Л4 — 90°
-		// ==========================================
-
-		NewLine();
-		AddPointToLine({ 0, -300,  5 });
-		AddPointToLine({ 0, -290,  5 });
-		AddPointToLine({ 0, -280,  5 });
-		AddPointToLine({ 0, -270,  5 });
-
-		NewLine();
-		AddPointToLine({ 0, -210,  5 });
-		AddPointToLine({ 0, -200,  5 });
-		AddPointToLine({ 0, -190,  5 });
-		AddPointToLine({ 0, -180,  5 });
-
-		NewLine();
-		AddPointToLine({ 0, -120,  5 });
-		AddPointToLine({ 0, -110,  5 });
-		AddPointToLine({ 0, -100,  5 });
-		AddPointToLine({ 0,  -90,  5 });
-
-		NewLine();
-		AddPointToLine({ 0,  -30,  5 });
-		AddPointToLine({ 0,  -20,  5 });
-		AddPointToLine({ 0,  -10,  5 });
-		AddPointToLine({ 0,    0,  5 });
-
-		NewLine();
-		AddPointToLine({ 0,   60,  5 });
-		AddPointToLine({ 0,   70,  5 });
-		AddPointToLine({ 0,   80,  5 });
-		AddPointToLine({ 0,   90,  5 });
-
-		NewLine();
-		AddPointToLine({ 0,  150,  5 });
-		AddPointToLine({ 0,  160,  5 });
-		AddPointToLine({ 0,  170,  5 });
-		AddPointToLine({ 0,  180,  5 });
-
-		NewLine();
-		AddPointToLine({ 0,  240,  5 });
-		AddPointToLine({ 0,  250,  5 });
-		AddPointToLine({ 0,  260,  5 });
-		AddPointToLine({ 0,  270,  5 });
-
-
-		// ==========================================
-		// Л5 — 120°
-		// ==========================================
-
-		NewLine();
-		AddPointToLine({ -3, -300,  4 });
-		AddPointToLine({ -3, -290,  4 });
-		AddPointToLine({ -3, -280,  4 });
-		AddPointToLine({ -3, -270,  4 });
-
-		NewLine();
-		AddPointToLine({ -3, -240,  4 });
-		AddPointToLine({ -3, -230,  4 });
-		AddPointToLine({ -3, -220,  4 });
-		AddPointToLine({ -3, -210,  4 });
-		AddPointToLine({ -3, -200,  4 });
-		AddPointToLine({ -3, -190,  4 });
-		AddPointToLine({ -3, -180,  4 });
-
-		NewLine();
-		AddPointToLine({ -3, -150,  4 });
-		AddPointToLine({ -3, -140,  4 });
-		AddPointToLine({ -3, -130,  4 });
-		AddPointToLine({ -3, -120,  4 });
-		AddPointToLine({ -3, -110,  4 });
-		AddPointToLine({ -3, -100,  4 });
-		AddPointToLine({ -3,  -90,  4 });
-
-		NewLine();
-		AddPointToLine({ -3,  -60,  4 });
-		AddPointToLine({ -3,  -50,  4 });
-		AddPointToLine({ -3,  -40,  4 });
-		AddPointToLine({ -3,  -30,  4 });
-		AddPointToLine({ -3,  -20,  4 });
-		AddPointToLine({ -3,  -10,  4 });
-		AddPointToLine({ -3,    0,  4 });
-
-		NewLine();
-		AddPointToLine({ -3,   30,  4 });
-		AddPointToLine({ -3,   40,  4 });
-		AddPointToLine({ -3,   50,  4 });
-		AddPointToLine({ -3,   60,  4 });
-		AddPointToLine({ -3,   70,  4 });
-		AddPointToLine({ -3,   80,  4 });
-		AddPointToLine({ -3,   90,  4 });
-
-		NewLine();
-		AddPointToLine({ -3,  120,  4 });
-		AddPointToLine({ -3,  130,  4 });
-		AddPointToLine({ -3,  140,  4 });
-		AddPointToLine({ -3,  150,  4 });
-		AddPointToLine({ -3,  160,  4 });
-		AddPointToLine({ -3,  170,  4 });
-		AddPointToLine({ -3,  180,  4 });
-
-		NewLine();
-		AddPointToLine({ -3,  210,  4 });
-		AddPointToLine({ -3,  220,  4 });
-		AddPointToLine({ -3,  230,  4 });
-		AddPointToLine({ -3,  240,  4 });
-		AddPointToLine({ -3,  250,  4 });
-		AddPointToLine({ -3,  260,  4 });
-		AddPointToLine({ -3,  270,  4 });
-
-
-		// ==========================================
-		// Л6 — 150°
-		// ==========================================
-
-		NewLine();
-		AddPointToLine({ -4, -240,  3 });
-		AddPointToLine({ -4, -230,  3 });
-		AddPointToLine({ -4, -220,  3 });
-		AddPointToLine({ -4, -210,  3 });
-
-		NewLine();
-		AddPointToLine({ -4, -150,  3 });
-		AddPointToLine({ -4, -140,  3 });
-		AddPointToLine({ -4, -130,  3 });
-		AddPointToLine({ -4, -120,  3 });
-
-		NewLine();
-		AddPointToLine({ -4,  -60,  3 });
-		AddPointToLine({ -4,  -50,  3 });
-		AddPointToLine({ -4,  -40,  3 });
-		AddPointToLine({ -4,  -30,  3 });
-
-		NewLine();
-		AddPointToLine({ -4,   30,  3 });
-		AddPointToLine({ -4,   40,  3 });
-		AddPointToLine({ -4,   50,  3 });
-		AddPointToLine({ -4,   60,  3 });
-
-		NewLine();
-		AddPointToLine({ -4,  120,  3 });
-		AddPointToLine({ -4,  130,  3 });
-		AddPointToLine({ -4,  140,  3 });
-		AddPointToLine({ -4,  150,  3 });
-
-		NewLine();
-		AddPointToLine({ -4,  210,  3 });
-		AddPointToLine({ -4,  220,  3 });
-		AddPointToLine({ -4,  230,  3 });
-		AddPointToLine({ -4,  240,  3 });
-
-
-		// ==========================================
-		// Л7 — 180°
-		// ==========================================
-
-		NewLine();
-		AddPointToLine({ -5, -300,  0 });
-		AddPointToLine({ -5, -290,  0 });
-		AddPointToLine({ -5, -280,  0 });
-		AddPointToLine({ -5, -270,  0 });
-
-		NewLine();
-		AddPointToLine({ -5, -210,  0 });
-		AddPointToLine({ -5, -200,  0 });
-		AddPointToLine({ -5, -190,  0 });
-		AddPointToLine({ -5, -180,  0 });
-
-		NewLine();
-		AddPointToLine({ -5, -120,  0 });
-		AddPointToLine({ -5, -110,  0 });
-		AddPointToLine({ -5, -100,  0 });
-		AddPointToLine({ -5,  -90,  0 });
-
-		NewLine();
-		AddPointToLine({ -5,  -30,  0 });
-		AddPointToLine({ -5,  -20,  0 });
-		AddPointToLine({ -5,  -10,  0 });
-		AddPointToLine({ -5,    0,  0 });
-
-		NewLine();
-		AddPointToLine({ -5,   60,  0 });
-		AddPointToLine({ -5,   70,  0 });
-		AddPointToLine({ -5,   80,  0 });
-		AddPointToLine({ -5,   90,  0 });
-
-		NewLine();
-		AddPointToLine({ -5,  150,  0 });
-		AddPointToLine({ -5,  160,  0 });
-		AddPointToLine({ -5,  170,  0 });
-		AddPointToLine({ -5,  180,  0 });
-
-		NewLine();
-		AddPointToLine({ -5,  240,  0 });
-		AddPointToLine({ -5,  250,  0 });
-		AddPointToLine({ -5,  260,  0 });
-		AddPointToLine({ -5,  270,  0 });
-
-
-		// ==========================================
-		// Л8 — 210°
-		// ==========================================
-
-		NewLine();
-		AddPointToLine({ -4, -300, -3 });
-		AddPointToLine({ -4, -290, -3 });
-		AddPointToLine({ -4, -280, -3 });
-		AddPointToLine({ -4, -270, -3 });
-
-		NewLine();
-		AddPointToLine({ -4, -210, -3 });
-		AddPointToLine({ -4, -200, -3 });
-		AddPointToLine({ -4, -190, -3 });
-		AddPointToLine({ -4, -180, -3 });
-
-		NewLine();
-		AddPointToLine({ -4, -120, -3 });
-		AddPointToLine({ -4, -110, -3 });
-		AddPointToLine({ -4, -100, -3 });
-		AddPointToLine({ -4,  -90, -3 });
-
-		NewLine();
-		AddPointToLine({ -4,  -30, -3 });
-		AddPointToLine({ -4,  -20, -3 });
-		AddPointToLine({ -4,  -10, -3 });
-		AddPointToLine({ -4,    0, -3 });
-
-		NewLine();
-		AddPointToLine({ -4,   60, -3 });
-		AddPointToLine({ -4,   70, -3 });
-		AddPointToLine({ -4,   80, -3 });
-		AddPointToLine({ -4,   90, -3 });
-
-		NewLine();
-		AddPointToLine({ -4,  150, -3 });
-		AddPointToLine({ -4,  160, -3 });
-		AddPointToLine({ -4,  170, -3 });
-		AddPointToLine({ -4,  180, -3 });
-
-		NewLine();
-		AddPointToLine({ -4,  240, -3 });
-		AddPointToLine({ -4,  250, -3 });
-		AddPointToLine({ -4,  260, -3 });
-		AddPointToLine({ -4,  270, -3 });
-
-
-		// ==========================================
-		// Л9 — 240°
-		// ==========================================
-
-		NewLine();
-		AddPointToLine({ -3, -240, -4 });
-		AddPointToLine({ -3, -230, -4 });
-		AddPointToLine({ -3, -220, -4 });
-		AddPointToLine({ -3, -210, -4 });
-		AddPointToLine({ -3, -200, -4 });
-		AddPointToLine({ -3, -190, -4 });
-		AddPointToLine({ -3, -180, -4 });
-
-		NewLine();
-		AddPointToLine({ -3, -150, -4 });
-		AddPointToLine({ -3, -140, -4 });
-		AddPointToLine({ -3, -130, -4 });
-		AddPointToLine({ -3, -120, -4 });
-		AddPointToLine({ -3, -110, -4 });
-		AddPointToLine({ -3, -100, -4 });
-		AddPointToLine({ -3,  -90, -4 });
-
-		NewLine();
-		AddPointToLine({ -3,  -60, -4 });
-		AddPointToLine({ -3,  -50, -4 });
-		AddPointToLine({ -3,  -40, -4 });
-		AddPointToLine({ -3,  -30, -4 });
-		AddPointToLine({ -3,  -20, -4 });
-		AddPointToLine({ -3,  -10, -4 });
-		AddPointToLine({ -3,    0, -4 });
-
-		NewLine();
-		AddPointToLine({ -3,   30, -4 });
-		AddPointToLine({ -3,   40, -4 });
-		AddPointToLine({ -3,   50, -4 });
-		AddPointToLine({ -3,   60, -4 });
-		AddPointToLine({ -3,   70, -4 });
-		AddPointToLine({ -3,   80, -4 });
-		AddPointToLine({ -3,   90, -4 });
-
-		NewLine();
-		AddPointToLine({ -3,  120, -4 });
-		AddPointToLine({ -3,  130, -4 });
-		AddPointToLine({ -3,  140, -4 });
-		AddPointToLine({ -3,  150, -4 });
-		AddPointToLine({ -3,  160, -4 });
-		AddPointToLine({ -3,  170, -4 });
-		AddPointToLine({ -3,  180, -4 });
-
-		NewLine();
-		AddPointToLine({ -3,  210, -4 });
-		AddPointToLine({ -3,  220, -4 });
-		AddPointToLine({ -3,  230, -4 });
-		AddPointToLine({ -3,  240, -4 });
-		AddPointToLine({ -3,  250, -4 });
-		AddPointToLine({ -3,  260, -4 });
-		AddPointToLine({ -3,  270, -4 });
-
-
-		// ==========================================
-		// Л10 — 270°
-		// ==========================================
-
-		NewLine();
-		AddPointToLine({ 0, -300, -5 });
-		AddPointToLine({ 0, -290, -5 });
-		AddPointToLine({ 0, -280, -5 });
-		AddPointToLine({ 0, -270, -5 });
-
-		NewLine();
-		AddPointToLine({ 0, -210, -5 });
-		AddPointToLine({ 0, -200, -5 });
-		AddPointToLine({ 0, -190, -5 });
-		AddPointToLine({ 0, -180, -5 });
-
-		NewLine();
-		AddPointToLine({ 0, -120, -5 });
-		AddPointToLine({ 0, -110, -5 });
-		AddPointToLine({ 0, -100, -5 });
-		AddPointToLine({ 0,  -90, -5 });
-
-		NewLine();
-		AddPointToLine({ 0,  -30, -5 });
-		AddPointToLine({ 0,  -20, -5 });
-		AddPointToLine({ 0,  -10, -5 });
-		AddPointToLine({ 0,    0, -5 });
-
-		NewLine();
-		AddPointToLine({ 0,   60, -5 });
-		AddPointToLine({ 0,   70, -5 });
-		AddPointToLine({ 0,   80, -5 });
-		AddPointToLine({ 0,   90, -5 });
-
-		NewLine();
-		AddPointToLine({ 0,  150, -5 });
-		AddPointToLine({ 0,  160, -5 });
-		AddPointToLine({ 0,  170, -5 });
-		AddPointToLine({ 0,  180, -5 });
-
-		NewLine();
-		AddPointToLine({ 0,  240, -5 });
-		AddPointToLine({ 0,  250, -5 });
-		AddPointToLine({ 0,  260, -5 });
-		AddPointToLine({ 0,  270, -5 });
-
-
-		// ==========================================
-		// Л11 — 300°
-		// ==========================================
-
-		NewLine();
-		AddPointToLine({ 3, -300, -4 });
-		AddPointToLine({ 3, -290, -4 });
-		AddPointToLine({ 3, -280, -4 });
-		AddPointToLine({ 3, -270, -4 });
-
-		NewLine();
-		AddPointToLine({ 3, -210, -4 });
-		AddPointToLine({ 3, -200, -4 });
-		AddPointToLine({ 3, -190, -4 });
-		AddPointToLine({ 3, -180, -4 });
-
-		NewLine();
-		AddPointToLine({ 3, -120, -4 });
-		AddPointToLine({ 3, -110, -4 });
-		AddPointToLine({ 3, -100, -4 });
-		AddPointToLine({ 3,  -90, -4 });
-
-		NewLine();
-		AddPointToLine({ 3,  -30, -4 });
-		AddPointToLine({ 3,  -20, -4 });
-		AddPointToLine({ 3,  -10, -4 });
-		AddPointToLine({ 3,    0, -4 });
-
-		NewLine();
-		AddPointToLine({ 3,   60, -4 });
-		AddPointToLine({ 3,   70, -4 });
-		AddPointToLine({ 3,   80, -4 });
-		AddPointToLine({ 3,   90, -4 });
-
-		NewLine();
-		AddPointToLine({ 3,  150, -4 });
-		AddPointToLine({ 3,  160, -4 });
-		AddPointToLine({ 3,  170, -4 });
-		AddPointToLine({ 3,  180, -4 });
-
-		NewLine();
-		AddPointToLine({ 3,  240, -4 });
-		AddPointToLine({ 3,  250, -4 });
-		AddPointToLine({ 3,  260, -4 });
-		AddPointToLine({ 3,  270, -4 });
-
-
-		// ==========================================
-		// Л12 — 330°
-		// ==========================================
-
-		NewLine();
-		AddPointToLine({ 4, -240, -3 });
-		AddPointToLine({ 4, -230, -3 });
-		AddPointToLine({ 4, -220, -3 });
-		AddPointToLine({ 4, -210, -3 });
-
-		NewLine();
-		AddPointToLine({ 4, -150, -3 });
-		AddPointToLine({ 4, -140, -3 });
-		AddPointToLine({ 4, -130, -3 });
-		AddPointToLine({ 4, -120, -3 });
-
-		NewLine();
-		AddPointToLine({ 4,  -60, -3 });
-		AddPointToLine({ 4,  -50, -3 });
-		AddPointToLine({ 4,  -40, -3 });
-		AddPointToLine({ 4,  -30, -3 });
-
-		NewLine();
-		AddPointToLine({ 4,   30, -3 });
-		AddPointToLine({ 4,   40, -3 });
-		AddPointToLine({ 4,   50, -3 });
-		AddPointToLine({ 4,   60, -3 });
-
-		NewLine();
-		AddPointToLine({ 4,  120, -3 });
-		AddPointToLine({ 4,  130, -3 });
-		AddPointToLine({ 4,  140, -3 });
-		AddPointToLine({ 4,  150, -3 });
-
-		NewLine();
-		AddPointToLine({ 4,  210, -3 });
-		AddPointToLine({ 4,  220, -3 });
-		AddPointToLine({ 4,  230, -3 });
-		AddPointToLine({ 4,  240, -3 });
-
-//
-//NewLine();
-//
-//AddPointToLine({ 150,-179, 320 });
-//AddPointToLine({ 151,-188, 319 });
-//AddPointToLine({ 152,-198, 318 });
-//AddPointToLine({ 152,-208, 317 });
-//AddPointToLine({ 151,-218, 316 });
-//AddPointToLine({ 150,-228, 315 });
-//
-//
-//// Нить 2
-//
-//NewLine();
-//
-//AddPointToLine({ 150,-179, 328 });
-//AddPointToLine({ 151,-188, 326 });
-//AddPointToLine({ 152,-198, 323 });
-//AddPointToLine({ 152,-208, 320 });
-//AddPointToLine({ 151,-218, 317 });
-//AddPointToLine({ 150,-228, 315 });
-//
-//
-//// Нить 3
-//
-//NewLine();
-//
-//AddPointToLine({ 150,-179, 320 });
-//AddPointToLine({ 149,-188, 320 });
-//AddPointToLine({ 149,-198, 319 });
-//AddPointToLine({ 149,-208, 318 });
-//AddPointToLine({ 150,-218, 316 });
-//AddPointToLine({ 150,-228, 315 });
-		
-
+		// Р¦РµРЅС‚СЂ С‚СЂСѓР±С‹: X = 0, Y = 0.
+// РџСЂРѕРґРѕР»СЊРЅР°СЏ РѕСЃСЊ С‚СЂСѓР±С‹: Z.
+// Р Р°РґРёСѓСЃ: 5.
+// РљР°Р¶РґС‹Р№ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёР№ СЃРµРіРјРµРЅС‚ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕ СЂР°Р·Р±РёС‚ РїСЂРѕРјРµР¶СѓС‚РѕС‡РЅС‹РјРё С‚РѕС‡РєР°РјРё.
+
+// Р¦РµРЅС‚СЂ С‚СЂСѓР±С‹: X = 0, Z = 0
+// РќР°РїСЂР°РІР»РµРЅРёРµ С‚СЂСѓР±С‹: Y
+// РџСЂРѕРјРµР¶СѓС‚РѕС‡РЅС‹Рµ С‚РѕС‡РєРё: С€Р°Рі 10
+
+// ==========================================================
+// РўР РЈР‘Рђ РЎ РР—Р“РР‘РћРњ 90В° Р’ РЎР•Р Р•Р”РРќР•
+// Р”Рѕ Y = 0  в†’ РЅР°РїСЂР°РІР»РµРЅРёРµ +Y
+// РџРѕСЃР»Рµ Y = 0 в†’ РїР»Р°РІРЅС‹Р№ РїРѕРІРѕСЂРѕС‚ в†’ РЅР°РїСЂР°РІР»РµРЅРёРµ +X
+// ==========================================================
+
+
+// ==========================================================
+// РўР РЈР‘Рђ вЂ” РўРћР›Р¬РљРћ РР—Р“РР‘ 90В° + Р“РћР РР—РћРќРўРђР›Р¬РќР«Р• РЈР§РђРЎРўРљР
+// ==========================================================
+
+
+// ==========================================================
+// РџРЈР§РћРљ Р РђР—РћР Р’РђРќРќР«РҐ РќРРўР•Р™
+// 90В° РёР·РіРёР± в†’ РґР»РёРЅРЅС‹Рµ РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅС‹Рµ СЂРІР°РЅС‹Рµ СѓС‡Р°СЃС‚РєРё
+// Р›РёРЅРёРё СЂР°Р·РЅРµСЃРµРЅС‹ РїРѕ Z Рё СЃР»РµРіРєР° РіСѓР»СЏСЋС‚ РїРѕ Y
+// ==========================================================
+
+
+// ==========================================================
+// Р›1 вЂ” 0В°
+// ==========================================================
+
+// ---- РёР·РіРёР± ----
+		NewLine();
+		AddPointToLine({ 8,  35,  0 });
+		AddPointToLine({ 15, 34,  0 });
+		AddPointToLine({ 23, 32,  0 });
+		AddPointToLine({ 31, 29,  0 });
+		AddPointToLine({ 39, 25,  0 });
+		AddPointToLine({ 46, 20,  0 });
+		AddPointToLine({ 52, 14,  0 });
+		AddPointToLine({ 56,  7,  0 });
+		AddPointToLine({ 58,  0,  0 });
+
+		// ---- РЅРёС‚СЊ 1 ----
+		NewLine();
+		AddPointToLine({ 28,  0,  0 });
+		AddPointToLine({ 82,  2,  4 });
+		AddPointToLine({ 98,  1,  6 });
+		AddPointToLine({ 113, -1,  3 });
+		AddPointToLine({ 128,  1, -1 });
+		AddPointToLine({ 140,  0, -2 });
+
+		// ---- РЅРёС‚СЊ 2 ----
+		// РЅР°С‡Р°Р»Рѕ РїСЂРёР±Р»РёР¶РµРЅРѕ Рє РєРѕРЅС†Сѓ Р›1-1
+		NewLine();
+		AddPointToLine({ 146,  0,  0 });
+		AddPointToLine({ 160, -2, -4 });
+		AddPointToLine({ 176, -1, -6 });
+		AddPointToLine({ 192,  2, -3 });
+		AddPointToLine({ 207,  1,  2 });
+		AddPointToLine({ 221, -1,  4 });
+
+		// ---- РЅРёС‚СЊ 3 ----
+		// СЃРјРµС‰РµРЅРёРµ РІ СЃС‚РѕСЂРѕРЅСѓ
+		NewLine();
+		AddPointToLine({ 228,  0,  3 });
+		AddPointToLine({ 243,  2,  6 });
+		AddPointToLine({ 259,  3,  7 });
+		AddPointToLine({ 275,  1,  4 });
+		AddPointToLine({ 291, -2, -1 });
+		AddPointToLine({ 305,  0, -4 });
+
+		// ---- РЅРёС‚СЊ 4 ----
+		NewLine();
+		AddPointToLine({ 312,  1, -2 });
+		AddPointToLine({ 328,  3, -5 });
+		AddPointToLine({ 344,  2, -7 });
+		AddPointToLine({ 360,  0, -4 });
+		AddPointToLine({ 377, -2,  1 });
+		AddPointToLine({ 393,  1,  4 });
+		AddPointToLine({ 410,  0,  2 });
+
+
+		// ==========================================================
+		// Р›2 вЂ” 90В°
+		// ==========================================================
+
+		// ---- РёР·РіРёР± ----
+		NewLine();
+		AddPointToLine({ 0, 35, 16 });
+		AddPointToLine({ 6, 34, 16 });
+		AddPointToLine({ 13,32, 16 });
+		AddPointToLine({ 20,29, 16 });
+		AddPointToLine({ 27,25, 16 });
+		AddPointToLine({ 34,20, 16 });
+		AddPointToLine({ 40,14, 16 });
+		AddPointToLine({ 44, 7, 16 });
+		AddPointToLine({ 46, 0, 16 });
+
+		// ---- РЅРёС‚СЊ 1 ----
+		NewLine();
+		AddPointToLine({ 47,  1, 16 });
+		AddPointToLine({ 70,  3, 12 });
+		AddPointToLine({ 86,  2, 10 });
+		AddPointToLine({ 102, 0, 13 });
+		AddPointToLine({ 118, -2, 18 });
+		AddPointToLine({ 132,  1, 20 });
+
+		// ---- РЅРёС‚СЊ 2 ----
+		// РЅР°С‡Р°Р»Рѕ СЂСЏРґРѕРј СЃ РєРѕРЅС†РѕРј Р›2-1
+		NewLine();
+		AddPointToLine({ 138,  1, 18 });
+		AddPointToLine({ 153, -1, 14 });
+		AddPointToLine({ 169,  0, 11 });
+		AddPointToLine({ 185,  2, 14 });
+		AddPointToLine({ 201,  1, 19 });
+		AddPointToLine({ 216, -1, 21 });
+
+		// ---- РЅРёС‚СЊ 3 ----
+		NewLine();
+		AddPointToLine({ 223,  0, 18 });
+		AddPointToLine({ 238,  2, 13 });
+		AddPointToLine({ 254,  3, 10 });
+		AddPointToLine({ 270,  1, 13 });
+		AddPointToLine({ 286, -2, 18 });
+		AddPointToLine({ 302,  0, 21 });
+
+		// ---- РЅРёС‚СЊ 4 ----
+		NewLine();
+		AddPointToLine({ 309,  1, 18 });
+		AddPointToLine({ 325,  3, 14 });
+		AddPointToLine({ 341,  2, 11 });
+		AddPointToLine({ 357,  0, 14 });
+		AddPointToLine({ 373, -2, 19 });
+		AddPointToLine({ 390,  1, 21 });
+		AddPointToLine({ 407,  0, 18 });
+
+
+		// ==========================================================
+		// Р›3 вЂ” 180В°
+		// ==========================================================
+
+		// ---- РёР·РіРёР± ----
+		NewLine();
+		AddPointToLine({ -15,35, 0 });
+		AddPointToLine({ -9,34, 0 });
+		AddPointToLine({ -2,32, 0 });
+		AddPointToLine({ 5,29, 0 });
+		AddPointToLine({ 12,25, 0 });
+		AddPointToLine({ 19,20, 0 });
+		AddPointToLine({ 25,14, 0 });
+		AddPointToLine({ 29, 7, 0 });
+		AddPointToLine({ 31,0,  0 });
+
+		// ---- РЅРёС‚СЊ 1 ----
+		NewLine();
+		AddPointToLine({ 41,  0,  0 });
+		AddPointToLine({ 55,  2, -4 });
+		AddPointToLine({ 71,  1, -7 });
+		AddPointToLine({ 87, -1, -4 });
+		AddPointToLine({ 103,  1,  1 });
+		AddPointToLine({ 117,  0,  4 });
+
+		// ---- РЅРёС‚СЊ 2 ----
+		// РЅР°С‡Р°Р»Рѕ СЂСЏРґРѕРј СЃ РєРѕРЅС†РѕРј РїСЂРµРґС‹РґСѓС‰РµРіРѕ
+		NewLine();
+		AddPointToLine({ 124,  0,  2 });
+		AddPointToLine({ 139, -2,  6 });
+		AddPointToLine({ 155, -1,  8 });
+		AddPointToLine({ 171,  1,  5 });
+		AddPointToLine({ 187,  2, -1 });
+		AddPointToLine({ 202,  0, -4 });
+
+		// ---- РЅРёС‚СЊ 3 ----
+		NewLine();
+		AddPointToLine({ 209,  1, -2 });
+		AddPointToLine({ 224,  3,  3 });
+		AddPointToLine({ 240,  2,  7 });
+		AddPointToLine({ 256,  0,  5 });
+		AddPointToLine({ 272, -2, -1 });
+		AddPointToLine({ 288,  0, -5 });
+
+		// ---- РЅРёС‚СЊ 4 ----
+		NewLine();
+		AddPointToLine({ 295,  1, -3 });
+		AddPointToLine({ 311,  2, -7 });
+		AddPointToLine({ 327,  1, -9 });
+		AddPointToLine({ 343, -1, -5 });
+		AddPointToLine({ 359, -2,  1 });
+		AddPointToLine({ 375,  0,  5 });
+		AddPointToLine({ 392,  1,  2 });
+
+
+		// ==========================================================
+		// Р›4 вЂ” 270В°
+		// ==========================================================
+
+		// ---- РёР·РіРёР± ----
+		NewLine();
+		AddPointToLine({ 0,35, -16 });
+		AddPointToLine({ 6,34, -16 });
+		AddPointToLine({ 13,32, -16 });
+		AddPointToLine({ 20,29, -16 });
+		AddPointToLine({ 27,25, -16 });
+		AddPointToLine({ 34,20, -16 });
+		AddPointToLine({ 40,14, -16 });
+		AddPointToLine({ 44, 7, -16 });
+		AddPointToLine({ 46, 0, -16 });
+
+		// ---- РЅРёС‚СЊ 1 ----
+		NewLine();
+		AddPointToLine({ 44,  1, -16 });
+		AddPointToLine({ 70,  3, -12 });
+		AddPointToLine({ 86,  2, -10 });
+		AddPointToLine({ 102, 0, -13 });
+		AddPointToLine({ 118, -2, -18 });
+		AddPointToLine({ 132,  1, -20 });
+
+		// ---- РЅРёС‚СЊ 2 ----
+		NewLine();
+		AddPointToLine({ 138,  1, -18 });
+		AddPointToLine({ 153, -1, -14 });
+		AddPointToLine({ 169,  0, -11 });
+		AddPointToLine({ 185,  2, -14 });
+		AddPointToLine({ 201,  1, -19 });
+		AddPointToLine({ 216, -1, -21 });
+
+		// ---- РЅРёС‚СЊ 3 ----
+		NewLine();
+		AddPointToLine({ 223,  0, -18 });
+		AddPointToLine({ 238,  2, -13 });
+		AddPointToLine({ 254,  3, -10 });
+		AddPointToLine({ 270,  1, -13 });
+		AddPointToLine({ 286, -2, -18 });
+		AddPointToLine({ 302,  0, -21 });
+
+		// ---- РЅРёС‚СЊ 4 ----
+		NewLine();
+		AddPointToLine({ 309,  1, -18 });
+		AddPointToLine({ 325,  3, -14 });
+		AddPointToLine({ 341,  2, -11 });
+		AddPointToLine({ 357,  0, -14 });
+		AddPointToLine({ 373, -2, -19 });
+		AddPointToLine({ 390,  1, -21 });
+		AddPointToLine({ 407,  0, -18 });
 
 		/*for (int i = 0; i < starsCount; i++)
 		{
-			// Начинаем с i + 1, чтобы не проверять i==j и не дублировать пары (j,i)
+			// РќР°С‡РёРЅР°РµРј СЃ i + 1, С‡С‚РѕР±С‹ РЅРµ РїСЂРѕРІРµСЂСЏС‚СЊ i==j Рё РЅРµ РґСѓР±Р»РёСЂРѕРІР°С‚СЊ РїР°СЂС‹ (j,i)
 			for (int j = i + 1; j < starsCount; j++)
 			{
 				float4 start = gemini[i];
 				float4 end = gemini[j];
 
-				// Проверка дистанции в исходном диапазоне -1...1
+				// РџСЂРѕРІРµСЂРєР° РґРёСЃС‚Р°РЅС†РёРё РІ РёСЃС…РѕРґРЅРѕРј РґРёР°РїР°Р·РѕРЅРµ -1...1
 				if (distance(start, end) < .75)
 				{
 					NewLine();
@@ -1537,7 +1143,7 @@ namespace Object {
 						p.y += getRandFloat()*rs;
 						p.z += getRandFloat()*rs;
 
-						// Масштабируем координаты точек для игрового мира
+						// РњР°СЃС€С‚Р°Р±РёСЂСѓРµРј РєРѕРѕСЂРґРёРЅР°С‚С‹ С‚РѕС‡РµРє РґР»СЏ РёРіСЂРѕРІРѕРіРѕ РјРёСЂР°
 						float scale = 600;
 						p.x *= scale;
 						p.y *= scale;
