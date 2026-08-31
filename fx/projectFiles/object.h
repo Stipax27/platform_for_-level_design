@@ -1,4 +1,4 @@
-float distance(const float4& p1, const float4& p2) {
+п»їfloat distance(const float4& p1, const float4& p2) {
 	float dx = p2.x - p1.x;
 	float dy = p2.y - p1.y;
 	float dz = p2.z - p1.z;
@@ -11,7 +11,7 @@ float4 lerp3(const float4& a, const float4& b, float t) {
 		a.x + t * (b.x - a.x),
 		a.y + t * (b.y - a.y),
 		a.z + t * (b.z - a.z),
-		a.w // Сохраняем оригинальное значение w из первой точки
+		a.w // РЎРѕС…СЂР°РЅСЏРµРј РѕСЂРёРіРёРЅР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ w РёР· РїРµСЂРІРѕР№ С‚РѕС‡РєРё
 	};
 }
 
@@ -20,20 +20,20 @@ float frac(float x) {
 }
 
 float4 normalize(const float4& v) {
-	// Считаем длину вектора по формуле Пифагора
+	// РЎС‡РёС‚Р°РµРј РґР»РёРЅСѓ РІРµРєС‚РѕСЂР° РїРѕ С„РѕСЂРјСѓР»Рµ РџРёС„Р°РіРѕСЂР°
 	float length = std::sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
 
-	// Защита от деления на ноль (если вектор нулевой)
+	// Р—Р°С‰РёС‚Р° РѕС‚ РґРµР»РµРЅРёСЏ РЅР° РЅРѕР»СЊ (РµСЃР»Рё РІРµРєС‚РѕСЂ РЅСѓР»РµРІРѕР№)
 	if (length < 0.00001f) {
 		return float4{ 0.0f, 0.0f, 0.0f, v.w };
 	}
 
-	// Возвращаем нормализованный вектор
+	// Р’РѕР·РІСЂР°С‰Р°РµРј РЅРѕСЂРјР°Р»РёР·РѕРІР°РЅРЅС‹Р№ РІРµРєС‚РѕСЂ
 	return float4{
 		v.x / length,
 		v.y / length,
 		v.z / length,
-		v.w // Поле w оставляем оригинальным
+		v.w // РџРѕР»Рµ w РѕСЃС‚Р°РІР»СЏРµРј РѕСЂРёРіРёРЅР°Р»СЊРЅС‹Рј
 	};
 }
 
@@ -42,7 +42,7 @@ float4 cross(const float4& a, const float4& b) {
 		a.y * b.z - a.z * b.y,
 		a.z * b.x - a.x * b.z,
 		a.x * b.y - a.y * b.x,
-		0.0f // Для векторов направления w обычно равен 0
+		0.0f // Р”Р»СЏ РІРµРєС‚РѕСЂРѕРІ РЅР°РїСЂР°РІР»РµРЅРёСЏ w РѕР±С‹С‡РЅРѕ СЂР°РІРµРЅ 0
 	};
 }
 
@@ -513,25 +513,25 @@ namespace Object {
 		psModeSet(in.mode);
 
 		XMMATRIX invViewMatrix = XMMatrixInverse(nullptr, XMMatrixTranspose(ConstBuf::camera.view[0]));
-		// Позиция камеры находится в 4-й строке инвертированной матрицы (вектор смещения)
+		// РџРѕР·РёС†РёСЏ РєР°РјРµСЂС‹ РЅР°С…РѕРґРёС‚СЃСЏ РІ 4-Р№ СЃС‚СЂРѕРєРµ РёРЅРІРµСЂС‚РёСЂРѕРІР°РЅРЅРѕР№ РјР°С‚СЂРёС†С‹ (РІРµРєС‚РѕСЂ СЃРјРµС‰РµРЅРёСЏ)
 		XMVECTOR cameraPos = invViewMatrix.r[3];
-		// Если нужно получить отдельные float:
+		// Р•СЃР»Рё РЅСѓР¶РЅРѕ РїРѕР»СѓС‡РёС‚СЊ РѕС‚РґРµР»СЊРЅС‹Рµ float:
 		XMFLOAT3 eye;
 		XMStoreFloat3(&eye, cameraPos);
 
 		XMVECTOR cameraLookAtVec = XMVector3Normalize(invViewMatrix.r[2]);
 
-		// Сохраняем в структуру XMFLOAT3 для передачи в Shader Constants / Constant Buffer
+		// РЎРѕС…СЂР°РЅСЏРµРј РІ СЃС‚СЂСѓРєС‚СѓСЂСѓ XMFLOAT3 РґР»СЏ РїРµСЂРµРґР°С‡Рё РІ Shader Constants / Constant Buffer
 		XMFLOAT3 cameraForward;
 		XMStoreFloat3(&cameraForward, cameraLookAtVec);
 
-		// 1. Извлекаем и нормализуем вектор Right (1-я строка инвертированной матрицы)
+		// 1. РР·РІР»РµРєР°РµРј Рё РЅРѕСЂРјР°Р»РёР·СѓРµРј РІРµРєС‚РѕСЂ Right (1-СЏ СЃС‚СЂРѕРєР° РёРЅРІРµСЂС‚РёСЂРѕРІР°РЅРЅРѕР№ РјР°С‚СЂРёС†С‹)
 		XMVECTOR cameraRightVec = XMVector3Normalize(invViewMatrix.r[0]);
 
-		// 2. Извлекаем и нормализуем вектор Up (2-я строка инвертированной матрицы)
+		// 2. РР·РІР»РµРєР°РµРј Рё РЅРѕСЂРјР°Р»РёР·СѓРµРј РІРµРєС‚РѕСЂ Up (2-СЏ СЃС‚СЂРѕРєР° РёРЅРІРµСЂС‚РёСЂРѕРІР°РЅРЅРѕР№ РјР°С‚СЂРёС†С‹)
 		XMVECTOR cameraUpVec = XMVector3Normalize(invViewMatrix.r[1]);
 
-		// Сохраняем в структуры XMFLOAT3 для передачи в ваш Constant Buffer
+		// РЎРѕС…СЂР°РЅСЏРµРј РІ СЃС‚СЂСѓРєС‚СѓСЂС‹ XMFLOAT3 РґР»СЏ РїРµСЂРµРґР°С‡Рё РІ РІР°С€ Constant Buffer
 		XMFLOAT3 cameraRight;
 		XMStoreFloat3(&cameraRight, cameraRightVec);
 
@@ -610,7 +610,7 @@ namespace Object {
 
 
 	void smoothStarline(starline& line) {
-		line.pointCount = 0; // Сбрасываем старый результат сглаживания
+		line.pointCount = 0; // РЎР±СЂР°СЃС‹РІР°РµРј СЃС‚Р°СЂС‹Р№ СЂРµР·СѓР»СЊС‚Р°С‚ СЃРіР»Р°Р¶РёРІР°РЅРёСЏ
 
 		float totalLength = 0;
 		for (int i = 0; i < line.basePointCount-1; i++)
@@ -621,9 +621,9 @@ namespace Object {
 		int stepsPerSegment = totalLength/25.;
 		if (stepsPerSegment < 2) stepsPerSegment = 2;
 
-		// Если исходных точек недостаточно для сглаживания или шаг некорректен
+		// Р•СЃР»Рё РёСЃС…РѕРґРЅС‹С… С‚РѕС‡РµРє РЅРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РґР»СЏ СЃРіР»Р°Р¶РёРІР°РЅРёСЏ РёР»Рё С€Р°Рі РЅРµРєРѕСЂСЂРµРєС‚РµРЅ
 		if (line.basePointCount < 2 || stepsPerSegment <= 0) {
-			// Просто копируем исходные точки в результирующий массив
+			// РџСЂРѕСЃС‚Рѕ РєРѕРїРёСЂСѓРµРј РёСЃС…РѕРґРЅС‹Рµ С‚РѕС‡РєРё РІ СЂРµР·СѓР»СЊС‚РёСЂСѓСЋС‰РёР№ РјР°СЃСЃРёРІ
 			int limit = (line.basePointCount > smoothPointMAX) ? smoothPointMAX : line.basePointCount;
 			for (int i = 0; i < limit; ++i) {
 				line.point[i] = line.basePoint[i];
@@ -632,17 +632,17 @@ namespace Object {
 			return;
 		}
 
-		// Проходим по сегментам между исходными точками basePoint
+		// РџСЂРѕС…РѕРґРёРј РїРѕ СЃРµРіРјРµРЅС‚Р°Рј РјРµР¶РґСѓ РёСЃС…РѕРґРЅС‹РјРё С‚РѕС‡РєР°РјРё basePoint
 		for (int i = 0; i < line.basePointCount - 1; ++i) {
-			// Формируем 4 опорные точки для Кэтмулла-Рома (с виртуальным продлением на краях)
+			// Р¤РѕСЂРјРёСЂСѓРµРј 4 РѕРїРѕСЂРЅС‹Рµ С‚РѕС‡РєРё РґР»СЏ РљСЌС‚РјСѓР»Р»Р°-Р РѕРјР° (СЃ РІРёСЂС‚СѓР°Р»СЊРЅС‹Рј РїСЂРѕРґР»РµРЅРёРµРј РЅР° РєСЂР°СЏС…)
 			float4 p0 = (i == 0) ? line.basePoint[i] : line.basePoint[i - 1];
 			float4 p1 = line.basePoint[i];
 			float4 p2 = line.basePoint[i + 1];
 			float4 p3 = (i == line.basePointCount - 2) ? line.basePoint[i + 1] : line.basePoint[i + 2];
 
-			// Генерируем промежуточные точки внутри текущего сегмента
+			// Р“РµРЅРµСЂРёСЂСѓРµРј РїСЂРѕРјРµР¶СѓС‚РѕС‡РЅС‹Рµ С‚РѕС‡РєРё РІРЅСѓС‚СЂРё С‚РµРєСѓС‰РµРіРѕ СЃРµРіРјРµРЅС‚Р°
 			for (int step = 0; step < stepsPerSegment; ++step) {
-				// Защита от переполнения жестко ограниченного массива point[100]
+				// Р—Р°С‰РёС‚Р° РѕС‚ РїРµСЂРµРїРѕР»РЅРµРЅРёСЏ Р¶РµСЃС‚РєРѕ РѕРіСЂР°РЅРёС‡РµРЅРЅРѕРіРѕ РјР°СЃСЃРёРІР° point[100]
 				if (line.pointCount >= smoothPointMAX) {
 					return;
 				}
@@ -653,7 +653,7 @@ namespace Object {
 			}
 		}
 
-		// Добавляем финальную опорную точку, чтобы линия завершилась корректно
+		// Р”РѕР±Р°РІР»СЏРµРј С„РёРЅР°Р»СЊРЅСѓСЋ РѕРїРѕСЂРЅСѓСЋ С‚РѕС‡РєСѓ, С‡С‚РѕР±С‹ Р»РёРЅРёСЏ Р·Р°РІРµСЂС€РёР»Р°СЃСЊ РєРѕСЂСЂРµРєС‚РЅРѕ
 		if (line.pointCount < smoothPointMAX) {
 			line.point[line.pointCount] = line.basePoint[line.basePointCount - 1];
 			line.pointCount++;
@@ -663,14 +663,14 @@ namespace Object {
 	
 
 	void Starline(starline& line, int stepsPerSegment) {
-		line.pointCount = 0; // Сбрасываем старый результат сглаживания
+		line.pointCount = 0; // РЎР±СЂР°СЃС‹РІР°РµРј СЃС‚Р°СЂС‹Р№ СЂРµР·СѓР»СЊС‚Р°С‚ СЃРіР»Р°Р¶РёРІР°РЅРёСЏ
 
-		// Проходим по сегментам между исходными точками basePoint
+		// РџСЂРѕС…РѕРґРёРј РїРѕ СЃРµРіРјРµРЅС‚Р°Рј РјРµР¶РґСѓ РёСЃС…РѕРґРЅС‹РјРё С‚РѕС‡РєР°РјРё basePoint
 		for (int i = 0; i < line.basePointCount - 1; ++i) {
 
-			// Генерируем промежуточные точки внутри текущего сегмента
+			// Р“РµРЅРµСЂРёСЂСѓРµРј РїСЂРѕРјРµР¶СѓС‚РѕС‡РЅС‹Рµ С‚РѕС‡РєРё РІРЅСѓС‚СЂРё С‚РµРєСѓС‰РµРіРѕ СЃРµРіРјРµРЅС‚Р°
 			for (int step = 0; step < stepsPerSegment; ++step) {
-				// Защита от переполнения жестко ограниченного массива point[100]
+				// Р—Р°С‰РёС‚Р° РѕС‚ РїРµСЂРµРїРѕР»РЅРµРЅРёСЏ Р¶РµСЃС‚РєРѕ РѕРіСЂР°РЅРёС‡РµРЅРЅРѕРіРѕ РјР°СЃСЃРёРІР° point[100]
 				if (line.pointCount >= smoothPointMAX) {
 					return;
 				}
@@ -681,7 +681,7 @@ namespace Object {
 			}
 		}
 
-		// Добавляем финальную опорную точку, чтобы линия завершилась корректно
+		// Р”РѕР±Р°РІР»СЏРµРј С„РёРЅР°Р»СЊРЅСѓСЋ РѕРїРѕСЂРЅСѓСЋ С‚РѕС‡РєСѓ, С‡С‚РѕР±С‹ Р»РёРЅРёСЏ Р·Р°РІРµСЂС€РёР»Р°СЃСЊ РєРѕСЂСЂРµРєС‚РЅРѕ
 		if (line.pointCount < smoothPointMAX) {
 			line.point[line.pointCount] = line.basePoint[line.basePointCount - 1];
 			line.pointCount++;
@@ -689,17 +689,17 @@ namespace Object {
 	}
 
 
-	// Функция плавной интерполяции (Smoothstep / Fade)
+	// Р¤СѓРЅРєС†РёСЏ РїР»Р°РІРЅРѕР№ РёРЅС‚РµСЂРїРѕР»СЏС†РёРё (Smoothstep / Fade)
 	inline float perlin_fade(float t) {
 		return t * t * t * (t * (t * 6.0f - 15.0f) + 10.0f);
 	}
 
-	// Линейная интерполяция
+	// Р›РёРЅРµР№РЅР°СЏ РёРЅС‚РµСЂРїРѕР»СЏС†РёСЏ
 	inline float perlin_lerp(float t, float a, float b) {
 		return a + t * (b - a);
 	}
 
-	// Вычисление скалярного произведения с градиентным вектором
+	// Р’С‹С‡РёСЃР»РµРЅРёРµ СЃРєР°Р»СЏСЂРЅРѕРіРѕ РїСЂРѕРёР·РІРµРґРµРЅРёСЏ СЃ РіСЂР°РґРёРµРЅС‚РЅС‹Рј РІРµРєС‚РѕСЂРѕРј
 	inline float perlin_grad(int hash, float x, float y, float z) {
 		int h = hash & 15;
 		float u = h < 8 ? x : y;
@@ -707,9 +707,9 @@ namespace Object {
 		return ((h & 1) == 0 ? u : -u) + ((h & 2) == 0 ? v : -v);
 	}
 
-	// Вспомогательная функция для получения одного скалярного значения шума
+	// Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅР°СЏ С„СѓРЅРєС†РёСЏ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РѕРґРЅРѕРіРѕ СЃРєР°Р»СЏСЂРЅРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ С€СѓРјР°
 	float GetSinglePerlinNoise3D(float x, float y, float z) {
-		// Таблица перестановок Перлина (повторена дважды, чтобы избежать выхода за границы при +1)
+		// РўР°Р±Р»РёС†Р° РїРµСЂРµСЃС‚Р°РЅРѕРІРѕРє РџРµСЂР»РёРЅР° (РїРѕРІС‚РѕСЂРµРЅР° РґРІР°Р¶РґС‹, С‡С‚РѕР±С‹ РёР·Р±РµР¶Р°С‚СЊ РІС‹С…РѕРґР° Р·Р° РіСЂР°РЅРёС†С‹ РїСЂРё +1)
 		static const int p[512] = {
 			151,160,137,91,90,15,131,13,201,95,96,53,194,233,7,225,140,36,103,30,69,142,8,99,37,240,21,10,23,
 			190,6,148,247,120,234,75,0,26,56,62,94,252,219,203,117,35,11,32,57,177,33,88,237,149,56,87,174,20,
@@ -721,7 +721,7 @@ namespace Object {
 			251,34,242,193,238,210,144,12,191,179,162,241,81,51,145,235,249,14,239,107,49,192,214,31,181,199,106,
 			157,184,84,204,176,115,121,50,45,127,4,150,254,138,236,205,93,222,114,67,29,24,72,243,141,128,195,78,
 			66,215,61,156,180,
-			// Повторение массива
+			// РџРѕРІС‚РѕСЂРµРЅРёРµ РјР°СЃСЃРёРІР°
 			151,160,137,91,90,15,131,13,201,95,96,53,194,233,7,225,140,36,103,30,69,142,8,99,37,240,21,10,23,
 			190,6,148,247,120,234,75,0,26,56,62,94,252,219,203,117,35,11,32,57,177,33,88,237,149,56,87,174,20,
 			125,136,171,168,68,175,74,165,71,134,139,48,27,166,77,146,158,231,83,111,229,122,60,211,133,230,220,
@@ -763,14 +763,14 @@ namespace Object {
 					perlin_grad(p[BB + 1], x - 1, y - 1, z - 1))));
 	}
 
-	// Целевая функция, принимающая три аргумента и возвращающая XMVECTOR
+	// Р¦РµР»РµРІР°СЏ С„СѓРЅРєС†РёСЏ, РїСЂРёРЅРёРјР°СЋС‰Р°СЏ С‚СЂРё Р°СЂРіСѓРјРµРЅС‚Р° Рё РІРѕР·РІСЂР°С‰Р°СЋС‰Р°СЏ XMVECTOR
 	XMVECTOR GetPerlinNoiseVector3(float x, float y, float z) {
-		// Смещаем координаты для каждого канала, чтобы значения X, Y и Z не дублировали друг друга
+		// РЎРјРµС‰Р°РµРј РєРѕРѕСЂРґРёРЅР°С‚С‹ РґР»СЏ РєР°Р¶РґРѕРіРѕ РєР°РЅР°Р»Р°, С‡С‚РѕР±С‹ Р·РЅР°С‡РµРЅРёСЏ X, Y Рё Z РЅРµ РґСѓР±Р»РёСЂРѕРІР°Р»Рё РґСЂСѓРі РґСЂСѓРіР°
 		float nx = GetSinglePerlinNoise3D(x, y, z);
 		float ny = GetSinglePerlinNoise3D(x + 31.415f, y + 58.271f, z + 93.123f);
 		float nz = GetSinglePerlinNoise3D(x + 115.53f, y + 213.91f, z + 351.67f);
 
-		// Возвращаем упакованный в SIMD-регистр вектор (компонента W = 0.0f)
+		// Р’РѕР·РІСЂР°С‰Р°РµРј СѓРїР°РєРѕРІР°РЅРЅС‹Р№ РІ SIMD-СЂРµРіРёСЃС‚СЂ РІРµРєС‚РѕСЂ (РєРѕРјРїРѕРЅРµРЅС‚Р° W = 0.0f)
 		return XMVectorSet(nx, ny, nz, 0.0f);
 	}
 
@@ -820,7 +820,7 @@ namespace Object {
 			p.y += getRandFloat() * rs;
 			p.z += getRandFloat() * rs;
 
-			// Масштабируем координаты точек для игрового мира
+			// РњР°СЃС€С‚Р°Р±РёСЂСѓРµРј РєРѕРѕСЂРґРёРЅР°С‚С‹ С‚РѕС‡РµРє РґР»СЏ РёРіСЂРѕРІРѕРіРѕ РјРёСЂР°
 			float scale = 600;
 			p.x *= scale;
 			p.y *= scale;
@@ -865,241 +865,892 @@ namespace Object {
 		genSegment(gemini[10], gemini[16]);
 		*/
 		//============================================================
-// 5 ИЗВИЛИСТЫХ ПОТОКОВ
-// Ось: Z
+// 5 РР—Р’РР›РРЎРўР«РҐ РџРћРўРћРљРћР’
+// РћСЃСЊ: Z
 // Z: 2000 -> 12000
-// Радиус: ~5
-// Шаг точек: 25
-// Разрывы: ~20
+// Р Р°РґРёСѓСЃ: ~5
+// РЁР°Рі С‚РѕС‡РµРє: 25
+// Р Р°Р·СЂС‹РІС‹: ~20
 //============================================================
+
+	// ============================================================
+// РЈР§РђРЎРўРћРљ 1 вЂ” Р“Р•РћРњР•РўР РР§Р•РЎРљР Р РђР—Р’РЃР РќРЈРўР«Р™
+// РќР°РїСЂР°РІР»РµРЅРёРµ РґРІРёР¶РµРЅРёСЏ: РѕС‚ Р±С‹РІС€РµРіРѕ РєРѕРЅС†Р° Рє Р±С‹РІС€РµРјСѓ РЅР°С‡Р°Р»Сѓ
+// Y = 1208 -> Y = 0
+// ============================================================
+
+
+// ============================================================
+// Р›1 вЂ” Р±С‹РІС€Р°СЏ РїРѕСЃР»РµРґРЅСЏСЏ Р»РёРЅРёСЏ
+// ============================================================
+
+		NewLine();
+		AddPointToLine({ -2,    0,  19 });
+		AddPointToLine({ 3,   28,  22 });
+		AddPointToLine({ 8,   53,  26 });
+		AddPointToLine({ 10,   78,  30 });
+		AddPointToLine({ 8,  103, 34 });
+		AddPointToLine({ 3,  128, 35 });
+		AddPointToLine({ -2, 153,  32 });
+		AddPointToLine({ -6, 178,  27 });
+		AddPointToLine({ -8, 203,  21 });
+		AddPointToLine({ -4, 228,  16 });
+
+		NewLine();
+		AddPointToLine({ 0, 252,  15 });
+		AddPointToLine({ 5, 275,  19 });
+		AddPointToLine({ 9, 298,  24 });
+		AddPointToLine({ 10, 323,  29 });
+		AddPointToLine({ 6, 348,  31 });
+		AddPointToLine({ 1, 373,  28 });
+		AddPointToLine({ -3, 398,  23 });
+		AddPointToLine({ -5, 423,  17 });
+		AddPointToLine({ -1, 448,  13 });
+		AddPointToLine({ 3, 473,  11 });
+
+		NewLine();
+		AddPointToLine({ 6, 492,  13 });
+		AddPointToLine({ 9, 517,  18 });
+		AddPointToLine({ 9, 543,  24 });
+		AddPointToLine({ 5, 568,  29 });
+		AddPointToLine({ 0, 593,  31 });
+		AddPointToLine({ -4, 618,  29 });
+		AddPointToLine({ -6, 643,  24 });
+		AddPointToLine({ -5, 668,  18 });
+		AddPointToLine({ -1, 693,  13 });
+		AddPointToLine({ 2, 718,   9 });
+
+		NewLine();
+		AddPointToLine({ 38, 743,   7 });
+		AddPointToLine({ -3, 713,   9 });
+		AddPointToLine({ -7, 749,  14 });
+		AddPointToLine({ -8, 772,  20 });
+		AddPointToLine({ -3, 790,  25 });
+		AddPointToLine({ 3, 821,  27 });
+		AddPointToLine({ 8, 838,  25 });
+		AddPointToLine({ 11, 863,  21 });
+		AddPointToLine({ 10, 886,  16 });
+		AddPointToLine({ 7, 913,  11 });
+		AddPointToLine({ 2, 938,   7 });
+		AddPointToLine({ -1, 963,   5 });
+
+		NewLine();
+		AddPointToLine({ -6, 983,   7 });
+		AddPointToLine({ -8,1008,  11 });
+		AddPointToLine({ -5,1033,  15 });
+		AddPointToLine({ 0,1058,  17 });
+		AddPointToLine({ 5,1083,  16 });
+		AddPointToLine({ 8,1108,  13 });
+		AddPointToLine({ 9,1133,   9 });
+		AddPointToLine({ 8,1158,   5 });
+		AddPointToLine({ 6,1183,   2 });
+		AddPointToLine({ 5,1208,   0 });
+
+
+		// ============================================================
+		// Р›2 вЂ” Р±С‹РІС€РёРµ 3 Р»РёРЅРёРё
+		// ============================================================
+
+		NewLine();
+		AddPointToLine({ -6, 469, 16 });
+		AddPointToLine({ -8, 493, 21 });
+		AddPointToLine({ -6, 518, 27 });
+		AddPointToLine({ -2, 543, 32 });
+		AddPointToLine({ 3, 568, 35 });
+		AddPointToLine({ 7, 593, 34 });
+		AddPointToLine({ 7, 618, 30 });
+		AddPointToLine({ 4, 643, 24 });
+		AddPointToLine({ -1,668, 18 });
+		AddPointToLine({ -4,693, 14 });
+
+		NewLine();
+		AddPointToLine({ -28,734,15 });
+		AddPointToLine({ -8,732,19 });
+		AddPointToLine({ -4,753,25 });
+		AddPointToLine({ 1,785,30 });
+		AddPointToLine({ 5,813,32 });
+		AddPointToLine({ 7,838,30 });
+		AddPointToLine({ 4,863,26 });
+		AddPointToLine({ 0,888,21 });
+		AddPointToLine({ -4,913,16 });
+		AddPointToLine({ -5,938,12 });
+
+		NewLine();
+		AddPointToLine({ -1,959,10 });
+		AddPointToLine({ 4,983,12 });
+		AddPointToLine({ 8,1008,16 });
+		AddPointToLine({ 9,1033,20 });
+		AddPointToLine({ 7,1058,22 });
+		AddPointToLine({ 3,1083,21 });
+		AddPointToLine({ -1,1108,18 });
+		AddPointToLine({ -4,1133,14 });
+		AddPointToLine({ -5,1158,10 });
+		AddPointToLine({ -4,1183, 7 });
+		AddPointToLine({ -2,1208, 5 });
+
+
+		// ============================================================
+		// Р›3
+		// ============================================================
+
+		NewLine();
+		AddPointToLine({ -6,485,19 });
+		AddPointToLine({ -9,513,24 });
+		AddPointToLine({ -8,538,29 });
+		AddPointToLine({ -4,563,34 });
+		AddPointToLine({ 1,588,36 });
+		AddPointToLine({ 5,613,34 });
+		AddPointToLine({ 7,638,29 });
+		AddPointToLine({ 6,663,23 });
+		AddPointToLine({ 3,688,18 });
+		AddPointToLine({ -1,713,15 });
+
+		NewLine();
+		AddPointToLine({ -8,732,18 });
+		AddPointToLine({ -9,758,23 });
+		AddPointToLine({ -5,783,28 });
+		AddPointToLine({ 0,808,31 });
+		AddPointToLine({ 4,833,29 });
+		AddPointToLine({ 6,858,25 });
+		AddPointToLine({ 5,883,20 });
+		AddPointToLine({ 1,908,15 });
+		AddPointToLine({ -3,933,10 });
+		AddPointToLine({ -6,960, 7 });
+
+		NewLine();
+		AddPointToLine({ -7,983, 8 });
+		AddPointToLine({ -6,1008,12 });
+		AddPointToLine({ -3,1033,16 });
+		AddPointToLine({ 1,1058,18 });
+		AddPointToLine({ 4,1083,17 });
+		AddPointToLine({ 5,1108,14 });
+		AddPointToLine({ 3,1133,10 });
+		AddPointToLine({ -1,1158, 6 });
+		AddPointToLine({ -4,1183, 3 });
+		AddPointToLine({ -5,1208, 0 });
+
+
+		// ============================================================
+		// Р›4
+		// ============================================================
+
+		NewLine();
+		AddPointToLine({ -7,738,14 });
+		AddPointToLine({ -9,763,19 });
+		AddPointToLine({ -5,788,24 });
+		AddPointToLine({ 0,813,26 });
+		AddPointToLine({ 5,838,23 });
+		AddPointToLine({ 8,863,19 });
+		AddPointToLine({ 9,888,14 });
+		AddPointToLine({ 7,913, 9 });
+		AddPointToLine({ 4,938, 5 });
+		AddPointToLine({ 1,963, 2 });
+
+		NewLine();
+		AddPointToLine({ -4,983, 4 });
+		AddPointToLine({ -8,1008,8 });
+		AddPointToLine({ -9,1033,12 });
+		AddPointToLine({ -7,1058,14 });
+		AddPointToLine({ -3,1083,13 });
+		AddPointToLine({ 0,1108,10 });
+		AddPointToLine({ 3,1133, 6 });
+		AddPointToLine({ 5,1158, 2 });
+		AddPointToLine({ 5,1183,-1 });
+		AddPointToLine({ 3,1208,-4 });
+
+
+		// ============================================================
+		// Р›5
+		// ============================================================
+
+		NewLine();
+		AddPointToLine({ -5,738, 0 });
+		AddPointToLine({ -4,763, 3 });
+		AddPointToLine({ -2,788, 5 });
+		AddPointToLine({ 1,813, 5 });
+		AddPointToLine({ 4,838, 3 });
+		AddPointToLine({ 5,863,-1 });
+		AddPointToLine({ 3,888,-4 });
+		AddPointToLine({ -1,913,-5 });
+		AddPointToLine({ -4,938,-3 });
+		AddPointToLine({ -5,963, 1 });
+
+		NewLine();
+		AddPointToLine({ -3,983, 4 });
+		AddPointToLine({ 0,1008,5 });
+		AddPointToLine({ 3,1033,4 });
+		AddPointToLine({ 5,1058,2 });
+		AddPointToLine({ 5,1083,-1 });
+		AddPointToLine({ 3,1108,-4 });
+		AddPointToLine({ -1,1133,-5 });
+		AddPointToLine({ -4,1158,-3 });
+		AddPointToLine({ -5,1183, 1 });
+		AddPointToLine({ -3,1208, 4 });
+
+
+		// ============================================================
+		// РЈР§РђРЎРўРћРљ 2
+		// РџРµСЂРµРЅРµСЃС‘РЅ Рє РєРѕРЅС†Сѓ СѓС‡Р°СЃС‚РєР° 1
+		// РћСЃРЅРѕРІРЅРѕРµ РЅР°РїСЂР°РІР»РµРЅРёРµ С‚РµРїРµСЂСЊ РїСЂРѕРґРѕР»Р¶Р°РµС‚СЃСЏ РѕС‚ Y в‰€ 1208
+		// ============================================================
+
+
+		// ============================================================
+		// Р›1 вЂ” 0В°
+		// ============================================================
+
+		NewLine();
+		AddPointToLine({ 10,  1243, 19 });
+		AddPointToLine({ 17, 1242, 19 });
+		AddPointToLine({ 25, 1240, 19 });
+		AddPointToLine({ 33, 1237, 19 });
+		AddPointToLine({ 41, 1233, 19 });
+		AddPointToLine({ 48, 1228, 19 });
+		AddPointToLine({ 54, 1222, 19 });
+		AddPointToLine({ 58, 1215, 19 });
+		AddPointToLine({ 60, 1208, 19 });
+
+		NewLine();
+		AddPointToLine({ 30, 1208, 19 });
+		AddPointToLine({ 84, 1210, 23 });
+		AddPointToLine({ 100, 1209, 25 });
+		AddPointToLine({ 115, 1207, 22 });
+		AddPointToLine({ 130, 1209, 18 });
+		AddPointToLine({ 142, 1208, 17 });
+
+		NewLine();
+		AddPointToLine({ 148, 1208, 19 });
+		AddPointToLine({ 162, 1206, 15 });
+		AddPointToLine({ 178, 1207, 13 });
+		AddPointToLine({ 194, 1210, 16 });
+		AddPointToLine({ 209, 1209, 21 });
+		AddPointToLine({ 223, 1207, 23 });
+
+		NewLine();
+		AddPointToLine({ 230, 1208, 22 });
+		AddPointToLine({ 245, 1210, 25 });
+		AddPointToLine({ 261, 1211, 26 });
+		AddPointToLine({ 277, 1209, 23 });
+		AddPointToLine({ 293, 1206, 18 });
+		AddPointToLine({ 307, 1208, 15 });
+
+		NewLine();
+		AddPointToLine({ 314, 1209, 17 });
+		AddPointToLine({ 330, 1211, 14 });
+		AddPointToLine({ 346, 1210, 12 });
+		AddPointToLine({ 362, 1208, 15 });
+		AddPointToLine({ 379, 1206, 20 });
+		AddPointToLine({ 396, 1209, 23 });
+		AddPointToLine({ 413, 1208, 21 });
+
+
+		// ============================================================
+		// Р›2 вЂ” 90В°
+		// ============================================================
+
+		NewLine();
+		AddPointToLine({ 2, 1243, 35 });
+		AddPointToLine({ 8, 1242, 35 });
+		AddPointToLine({ 15,1240, 35 });
+		AddPointToLine({ 22,1237, 35 });
+		AddPointToLine({ 29,1233, 35 });
+		AddPointToLine({ 36,1228, 35 });
+		AddPointToLine({ 42,1222, 35 });
+		AddPointToLine({ 46,1215, 35 });
+		AddPointToLine({ 48,1208, 35 });
+
+		NewLine();
+		AddPointToLine({ 49,1209,35 });
+		AddPointToLine({ 72,1211,31 });
+		AddPointToLine({ 88,1210,29 });
+		AddPointToLine({ 104,1208,32 });
+		AddPointToLine({ 120,1206,37 });
+		AddPointToLine({ 134,1209,39 });
+
+		NewLine();
+		AddPointToLine({ 140,1209,37 });
+		AddPointToLine({ 155,1207,33 });
+		AddPointToLine({ 171,1208,30 });
+		AddPointToLine({ 187,1210,33 });
+		AddPointToLine({ 203,1209,38 });
+		AddPointToLine({ 218,1207,40 });
+
+		NewLine();
+		AddPointToLine({ 225,1208,37 });
+		AddPointToLine({ 240,1210,32 });
+		AddPointToLine({ 256,1211,29 });
+		AddPointToLine({ 272,1209,32 });
+		AddPointToLine({ 288,1206,37 });
+		AddPointToLine({ 304,1208,40 });
+
+		NewLine();
+		AddPointToLine({ 311,1209,37 });
+		AddPointToLine({ 327,1211,33 });
+		AddPointToLine({ 343,1210,30 });
+		AddPointToLine({ 359,1208,33 });
+		AddPointToLine({ 375,1206,38 });
+		AddPointToLine({ 392,1209,40 });
+		AddPointToLine({ 409,1208,37 });
+
+
+		// ============================================================
+		// Р›3 вЂ” 180В°
+		// ============================================================
+
+		NewLine();
+		AddPointToLine({ -13,1243,19 });
+		AddPointToLine({ -7,1242,19 });
+		AddPointToLine({ 0,1240,19 });
+		AddPointToLine({ 7,1237,19 });
+		AddPointToLine({ 14,1233,19 });
+		AddPointToLine({ 21,1228,19 });
+		AddPointToLine({ 27,1222,19 });
+		AddPointToLine({ 31,1215,19 });
+		AddPointToLine({ 33,1208,19 });
+
+		NewLine();
+		AddPointToLine({ 43,1208,19 });
+		AddPointToLine({ 57,1210,15 });
+		AddPointToLine({ 73,1209,12 });
+		AddPointToLine({ 89,1207,15 });
+		AddPointToLine({ 105,1209,20 });
+		AddPointToLine({ 119,1208,23 });
+
+		NewLine();
+		AddPointToLine({ 126,1208,21 });
+		AddPointToLine({ 141,1206,25 });
+		AddPointToLine({ 157,1207,27 });
+		AddPointToLine({ 173,1209,24 });
+		AddPointToLine({ 189,1210,18 });
+		AddPointToLine({ 204,1208,15 });
+
+		NewLine();
+		AddPointToLine({ 211,1209,17 });
+		AddPointToLine({ 226,1211,22 });
+		AddPointToLine({ 242,1210,26 });
+		AddPointToLine({ 258,1208,24 });
+		AddPointToLine({ 274,1206,18 });
+		AddPointToLine({ 290,1208,14 });
+
+		NewLine();
+		AddPointToLine({ 297,1209,16 });
+		AddPointToLine({ 313,1211,12 });
+		AddPointToLine({ 329,1210,10 });
+		AddPointToLine({ 345,1208,14 });
+		AddPointToLine({ 361,1206,20 });
+		AddPointToLine({ 377,1208,24 });
+		AddPointToLine({ 394,1209,21 });
+
+
+		// ============================================================
+		// Р›4 вЂ” 270В°
+		// ============================================================
+
+		NewLine();
+		AddPointToLine({ 2,1243,3 });
+		AddPointToLine({ 8,1242,3 });
+		AddPointToLine({ 15,1240,3 });
+		AddPointToLine({ 22,1237,3 });
+		AddPointToLine({ 29,1233,3 });
+		AddPointToLine({ 36,1228,3 });
+		AddPointToLine({ 42,1222,3 });
+		AddPointToLine({ 46,1215,3 });
+		AddPointToLine({ 48,1208,3 });
+
+		NewLine();
+		AddPointToLine({ 46,1209,3 });
+		AddPointToLine({ 72,1211,7 });
+		AddPointToLine({ 88,1210,9 });
+		AddPointToLine({ 104,1208,6 });
+		AddPointToLine({ 120,1206,1 });
+		AddPointToLine({ 134,1209,-1 });
+
+		NewLine();
+		AddPointToLine({ 140,1209,1 });
+		AddPointToLine({ 155,1207,5 });
+		AddPointToLine({ 171,1208,8 });
+		AddPointToLine({ 187,1210,5 });
+		AddPointToLine({ 203,1209,0 });
+		AddPointToLine({ 218,1207,-3 });
+
+		NewLine();
+		AddPointToLine({ 225,1208,1 });
+		AddPointToLine({ 240,1210,6 });
+		AddPointToLine({ 256,1211,9 });
+		AddPointToLine({ 272,1209,5 });
+		AddPointToLine({ 288,1206,0 });
+		AddPointToLine({ 304,1208,-3 });
+
+		NewLine();
+		AddPointToLine({ 311,1209,1 });
+		AddPointToLine({ 327,1211,5 });
+		AddPointToLine({ 343,1210,8 });
+		AddPointToLine({ 359,1208,5 });
+		AddPointToLine({ 375,1206,0 });
+		AddPointToLine({ 392,1209,-3 });
+		AddPointToLine({ 409,1208,0 });
+
+
+		// ============================================================
+		// РЈР§РђРЎРўРћРљ 3
+		// РќР°С‡Р°Р»Рѕ РїРѕСЃР»Рµ СѓС‡Р°СЃС‚РєР° 2
+		// ============================================================
+
+
+		// ============================================================
+		// Р›РРќРРЇ 1
+		// ============================================================
+
+		NewLine();
+		AddPointToLine({ 413, 1208,  19 });
+		AddPointToLine({ 420, 1208,   2 });
+		AddPointToLine({ 439, 1208, -10 });
+		AddPointToLine({ 506, 1208, -34 });
+		AddPointToLine({ 567, 1208,  18 });
+
+		NewLine();
+		AddPointToLine({ 413, 1208,  19 });
+		AddPointToLine({ 431, 1206,  31 });
+		AddPointToLine({ 445, 1203,  44 });
+		AddPointToLine({ 443, 1204,  57 });
+		AddPointToLine({ 438, 1207,  69 });
+		AddPointToLine({ 423, 1210,  82 });
+		AddPointToLine({ 398, 1212,  94 });
+		AddPointToLine({ 389, 1211, 109 });
+		AddPointToLine({ 393, 1205, 124 });
+
+		NewLine();
+		AddPointToLine({ 388, 1211, 119 });
+		AddPointToLine({ 393, 1207, 134 });
+		AddPointToLine({ 413, 1202, 149 });
+		AddPointToLine({ 433, 1204, 164 });
+		AddPointToLine({ 443, 1211, 179 });
+		AddPointToLine({ 428, 1214, 194 });
+		AddPointToLine({ 401, 1213, 209 });
+		AddPointToLine({ 391, 1208, 222 });
+		AddPointToLine({ 395, 1202, 236 });
+
+		NewLine();
+		AddPointToLine({ 385, 1207, 226 });
+		AddPointToLine({ 395, 1204, 241 });
+		AddPointToLine({ 423, 1201, 256 });
+		AddPointToLine({ 440, 1205, 271 });
+		AddPointToLine({ 438, 1211, 286 });
+		AddPointToLine({ 418, 1214, 301 });
+		AddPointToLine({ 388, 1212, 316 });
+		AddPointToLine({ 385, 1208, 329 });
+		AddPointToLine({ 403, 1202, 341 });
+
+		NewLine();
+		AddPointToLine({ 383, 1206, 331 });
+		AddPointToLine({ 395, 1203, 346 });
+		AddPointToLine({ 431, 1202, 361 });
+		AddPointToLine({ 443, 1208, 376 });
+		AddPointToLine({ 428, 1214, 391 });
+		AddPointToLine({ 398, 1214, 406 });
+		AddPointToLine({ 383, 1209, 421 });
+		AddPointToLine({ 388, 1205, 434 });
+		AddPointToLine({ 423, 1201, 446 });
+
+		NewLine();
+		AddPointToLine({ 401, 1203, 437 });
+		AddPointToLine({ 429, 1201, 452 });
+		AddPointToLine({ 449, 1204, 467 });
+		AddPointToLine({ 446, 1210, 482 });
+		AddPointToLine({ 421, 1215, 497 });
+		AddPointToLine({ 396, 1212, 512 });
+		AddPointToLine({ 391, 1206, 527 });
+		AddPointToLine({ 401, 1203, 540 });
+		AddPointToLine({ 411, 1202, 552 });
+
+		NewLine();
+		AddPointToLine({ 411, 1202, 542 });
+		AddPointToLine({ 429, 1203, 557 });
+		AddPointToLine({ 451, 1208, 572 });
+		AddPointToLine({ 441, 1213, 587 });
+		AddPointToLine({ 406, 1213, 602 });
+		AddPointToLine({ 409, 1209, 615 });
+		AddPointToLine({ 421, 1203, 627 });
+
+
+		// ============================================================
+		// Р›РРќРРЇ 2
+		// ============================================================
+
+		NewLine();
+		AddPointToLine({ 413,1208,19 });
+		AddPointToLine({ 395,1210,34 });
+		AddPointToLine({ 383,1213,49 });
+		AddPointToLine({ 391,1214,64 });
+		AddPointToLine({ 418,1211,79 });
+		AddPointToLine({ 435,1207,94 });
+		AddPointToLine({ 435,1203,109 });
+		AddPointToLine({ 423,1202,121 });
+		AddPointToLine({ 413,1203,129 });
+
+		NewLine();
+		AddPointToLine({ 435,1203,119 });
+		AddPointToLine({ 418,1203,134 });
+		AddPointToLine({ 391,1206,149 });
+		AddPointToLine({ 383,1211,164 });
+		AddPointToLine({ 398,1214,179 });
+		AddPointToLine({ 425,1213,194 });
+		AddPointToLine({ 443,1208,209 });
+		AddPointToLine({ 438,1204,222 });
+		AddPointToLine({ 423,1203,234 });
+
+		NewLine();
+		AddPointToLine({ 398,1202,224 });
+		AddPointToLine({ 388,1203,239 });
+		AddPointToLine({ 383,1206,254 });
+		AddPointToLine({ 393,1211,269 });
+		AddPointToLine({ 423,1215,284 });
+		AddPointToLine({ 441,1211,299 });
+		AddPointToLine({ 435,1203,314 });
+		AddPointToLine({ 418,1201,327 });
+		AddPointToLine({ 408,1201,339 });
+
+		NewLine();
+		AddPointToLine({ 385,1205,329 });
+		AddPointToLine({ 383,1208,344 });
+		AddPointToLine({ 388,1211,359 });
+		AddPointToLine({ 413,1215,374 });
+		AddPointToLine({ 438,1212,389 });
+		AddPointToLine({ 443,1206,404 });
+		AddPointToLine({ 423,1202,419 });
+		AddPointToLine({ 403,1202,432 });
+		AddPointToLine({ 393,1203,444 });
+
+		NewLine();
+		AddPointToLine({ 383,1209,434 });
+		AddPointToLine({ 388,1213,449 });
+		AddPointToLine({ 398,1214,464 });
+		AddPointToLine({ 418,1212,479 });
+		AddPointToLine({ 443,1208,494 });
+		AddPointToLine({ 431,1203,509 });
+		AddPointToLine({ 401,1202,524 });
+		AddPointToLine({ 388,1204,537 });
+		AddPointToLine({ 383,1207,549 });
+
+		NewLine();
+		AddPointToLine({ 383,1207,539 });
+		AddPointToLine({ 398,1211,554 });
+		AddPointToLine({ 423,1215,569 });
+		AddPointToLine({ 443,1212,584 });
+		AddPointToLine({ 448,1207,599 });
+		AddPointToLine({ 433,1203,609 });
+		AddPointToLine({ 413,1203,619 });
+
+
+		// ============================================================
+		// Р›РРќРРЇ 3
+		// ============================================================
+
+		NewLine();
+		AddPointToLine({ 413,1208,19 });
+		AddPointToLine({ 425,1213,35 });
+		AddPointToLine({ 438,1213,51 });
+		AddPointToLine({ 443,1209,67 });
+		AddPointToLine({ 427,1205,84 });
+		AddPointToLine({ 401,1203,101 });
+		AddPointToLine({ 378,1206,114 });
+		AddPointToLine({ 385,1209,126 });
+		AddPointToLine({ 397,1212,135 });
+
+		NewLine();
+		AddPointToLine({ 384,1206,125 });
+		AddPointToLine({ 397,1210,134 });
+		AddPointToLine({ 422,1214,151 });
+		AddPointToLine({ 441,1209,164 });
+		AddPointToLine({ 444,1202,181 });
+		AddPointToLine({ 419,1203,194 });
+		AddPointToLine({ 391,1208,211 });
+		AddPointToLine({ 382,1210,224 });
+		AddPointToLine({ 406,1215,241 });
+
+		NewLine();
+		AddPointToLine({ 383,1212,231 });
+		AddPointToLine({ 406,1214,239 });
+		AddPointToLine({ 436,1211,256 });
+		AddPointToLine({ 447,1203,269 });
+		AddPointToLine({ 430,1201,286 });
+		AddPointToLine({ 401,1206,299 });
+		AddPointToLine({ 382,1213,316 });
+		AddPointToLine({ 389,1216,327 });
+		AddPointToLine({ 406,1212,341 });
+
+		NewLine();
+		AddPointToLine({ 383,1209,331 });
+		AddPointToLine({ 410,1213,346 });
+		AddPointToLine({ 443,1210,359 });
+		AddPointToLine({ 430,1201,376 });
+		AddPointToLine({ 401,1200,389 });
+		AddPointToLine({ 383,1207,406 });
+		AddPointToLine({ 399,1216,419 });
+		AddPointToLine({ 427,1215,434 });
+		AddPointToLine({ 433,1209,446 });
+
+		NewLine();
+		AddPointToLine({ 443,1207,437 });
+		AddPointToLine({ 431,1201,452 });
+		AddPointToLine({ 415,1200,465 });
+		AddPointToLine({ 394,1207,482 });
+		AddPointToLine({ 383,1214,495 });
+		AddPointToLine({ 407,1217,512 });
+		AddPointToLine({ 437,1212,525 });
+		AddPointToLine({ 446,1205,540 });
+		AddPointToLine({ 440,1203,552 });
+
+		NewLine();
+		AddPointToLine({ 423,1200,542 });
+		AddPointToLine({ 409,1204,550 });
+		AddPointToLine({ 390,1210,567 });
+		AddPointToLine({ 382,1216,580 });
+		AddPointToLine({ 403,1213,597 });
+		AddPointToLine({ 426,1206,608 });
+		AddPointToLine({ 413,1203,621 });
+
+		// ============================================================
+// Р›РРќРРЇ 2 вЂ” Р РђРќР”РћРњРР—РР РћР’РђРќРќРђРЇ
+// Р’РўРћР РђРЇ РЁРР РћРљРђРЇ Р›РРќРРЇ РўР Р•РўР¬Р•Р“Рћ РЈР§РђРЎРўРљРђ
+// ============================================================
+
+// 2A
+		NewLine();
+		AddPointToLine({ 150,   0,   0 });
+		AddPointToLine({ 129,   5,  14 });
+		AddPointToLine({ 116,   2,  29 });
+		AddPointToLine({ 122,   8,  44 });
+		AddPointToLine({ 149,   4,  61 });
+		AddPointToLine({ 176,  -3,  74 });
+		AddPointToLine({ 180,  -8,  89 });
+		AddPointToLine({ 164,  -2, 103 });
+		AddPointToLine({ 151,  -7, 111 });
+
+		// 2B
+		NewLine();
+		AddPointToLine({ 171,  -4, 101 });
+		AddPointToLine({ 156,  -8, 116 });
+		AddPointToLine({ 132,  -1, 129 });
+		AddPointToLine({ 116,   6, 146 });
+		AddPointToLine({ 129,   9, 159 });
+		AddPointToLine({ 158,   3, 176 });
+		AddPointToLine({ 183,  -2, 189 });
+		AddPointToLine({ 179,  -7, 204 });
+		AddPointToLine({ 161,  -4, 216 });
+
+		// 2C
+		NewLine();
+		AddPointToLine({ 132,  -5, 206 });
+		AddPointToLine({ 119,  -7, 221 });
+		AddPointToLine({ 114,   1, 234 });
+		AddPointToLine({ 127,   8, 251 });
+		AddPointToLine({ 156,   6, 264 });
+		AddPointToLine({ 179,  -1, 281 });
+		AddPointToLine({ 171,  -8, 294 });
+		AddPointToLine({ 149,  -4, 309 });
+		AddPointToLine({ 137,  -7, 321 });
+
+
+		// ============================================================
+		// Р¦Р•РќРўР РђР›Р¬РќРђРЇ РЎРџРР РђР›Р¬РќРђРЇ Р’РћР РћРќРљРђ
+		// РџРћР”РљР›Р®Р§Р•РќРР• Рљ 2C
+		// ============================================================
+
+		// Р’С…РѕРґ 1
+		NewLine();
+		AddPointToLine({ 127,   8, 251 });
+		AddPointToLine({ 120,   7, 258 });
+		AddPointToLine({ 118,   6, 266 });
+		AddPointToLine({ 120,   5, 274 });
+		AddPointToLine({ 128,   5, 280 });
+		AddPointToLine({ 138,   5, 284 });
+
+		// Р’С…РѕРґ 2
+		NewLine();
+		AddPointToLine({ 156,   6, 264 });
+		AddPointToLine({ 150,   7, 270 });
+		AddPointToLine({ 145,   6, 276 });
+		AddPointToLine({ 142,   5, 280 });
+		AddPointToLine({ 138,   5, 284 });
+
+		// Р’С…РѕРґ 3
+		NewLine();
+		AddPointToLine({ 179,  -1, 281 });
+		AddPointToLine({ 170,   0, 283 });
+		AddPointToLine({ 160,   2, 284 });
+		AddPointToLine({ 150,   4, 284 });
+		AddPointToLine({ 138,   5, 284 });
+
+
+		// ============================================================
+		// РЎРџРР РђР›Р¬РќРђРЇ Р’РћР РћРќРљРђ вЂ” РќРРўР¬ 1
+		// ============================================================
+
+		NewLine();
+		AddPointToLine({ 138,   5, 284 });
+		AddPointToLine({ 155,   3, 288 });
+		AddPointToLine({ 170,   0, 298 });
+		AddPointToLine({ 181,  -5, 313 });
+		AddPointToLine({ 184, -11, 330 });
+		AddPointToLine({ 179, -17, 347 });
+		AddPointToLine({ 166, -23, 360 });
+		AddPointToLine({ 150, -29, 366 });
+		AddPointToLine({ 134, -35, 362 });
+		AddPointToLine({ 121, -41, 350 });
+		AddPointToLine({ 115, -47, 334 });
+		AddPointToLine({ 117, -53, 317 });
+		AddPointToLine({ 127, -59, 304 });
+		AddPointToLine({ 141, -65, 297 });
+		AddPointToLine({ 156, -71, 299 });
+		AddPointToLine({ 167, -77, 310 });
+		AddPointToLine({ 172, -83, 325 });
+		AddPointToLine({ 168, -89, 340 });
+		AddPointToLine({ 157, -95, 350 });
+		AddPointToLine({ 143,-101, 352 });
+		AddPointToLine({ 132,-107, 344 });
+		AddPointToLine({ 126,-113, 331 });
+		AddPointToLine({ 128,-119, 318 });
+		AddPointToLine({ 137,-125, 310 });
+		AddPointToLine({ 148,-131, 311 });
+		AddPointToLine({ 157,-137, 319 });
+		AddPointToLine({ 160,-143, 330 });
+		AddPointToLine({ 155,-149, 339 });
+		AddPointToLine({ 146,-155, 342 });
+		AddPointToLine({ 139,-161, 337 });
+		AddPointToLine({ 137,-167, 328 });
+		AddPointToLine({ 143,-173, 321 });
+		AddPointToLine({ 150,-179, 320 });
+
+
+		// ============================================================
+		// РЎРџРР РђР›Р¬РќРђРЇ Р’РћР РћРќРљРђ вЂ” РќРРўР¬ 2
+		// ============================================================
+
+		NewLine();
+		AddPointToLine({ 138,   5, 284 });
+		AddPointToLine({ 128,   4, 298 });
+		AddPointToLine({ 123,   1, 315 });
+		AddPointToLine({ 126,  -4, 333 });
+		AddPointToLine({ 137, -10, 347 });
+		AddPointToLine({ 152, -16, 356 });
+		AddPointToLine({ 169, -22, 354 });
+		AddPointToLine({ 181, -28, 342 });
+		AddPointToLine({ 184, -34, 325 });
+		AddPointToLine({ 179, -40, 309 });
+		AddPointToLine({ 166, -46, 298 });
+		AddPointToLine({ 151, -52, 296 });
+		AddPointToLine({ 137, -58, 304 });
+		AddPointToLine({ 130, -64, 317 });
+		AddPointToLine({ 132, -70, 331 });
+		AddPointToLine({ 142, -76, 340 });
+		AddPointToLine({ 155, -82, 341 });
+		AddPointToLine({ 165, -88, 333 });
+		AddPointToLine({ 169, -94, 321 });
+		AddPointToLine({ 164,-100, 311 });
+		AddPointToLine({ 154,-106, 307 });
+		AddPointToLine({ 143,-112, 312 });
+		AddPointToLine({ 137,-118, 322 });
+		AddPointToLine({ 140,-124, 332 });
+		AddPointToLine({ 149,-130, 337 });
+		AddPointToLine({ 157,-136, 332 });
+		AddPointToLine({ 160,-142, 323 });
+		AddPointToLine({ 155,-148, 316 });
+		AddPointToLine({ 148,-154, 315 });
+		AddPointToLine({ 142,-160, 320 });
+		AddPointToLine({ 141,-166, 327 });
+		AddPointToLine({ 146,-172, 331 });
+		AddPointToLine({ 150,-179, 328 });
+
+
+		// ============================================================
+		// РЎРџРР РђР›Р¬РќРђРЇ Р’РћР РћРќРљРђ вЂ” РќРРўР¬ 3
+		// ============================================================
+
+		NewLine();
+		AddPointToLine({ 138,   5, 284 });
+		AddPointToLine({ 132,   3, 300 });
+		AddPointToLine({ 136,   0, 317 });
+		AddPointToLine({ 147,  -5, 331 });
+		AddPointToLine({ 162, -11, 337 });
+		AddPointToLine({ 175, -17, 332 });
+		AddPointToLine({ 181, -23, 319 });
+		AddPointToLine({ 178, -29, 304 });
+		AddPointToLine({ 166, -35, 294 });
+		AddPointToLine({ 151, -41, 292 });
+		AddPointToLine({ 137, -47, 299 });
+		AddPointToLine({ 129, -53, 312 });
+		AddPointToLine({ 130, -59, 326 });
+		AddPointToLine({ 140, -65, 335 });
+		AddPointToLine({ 153, -71, 336 });
+		AddPointToLine({ 164, -77, 328 });
+		AddPointToLine({ 168, -83, 317 });
+		AddPointToLine({ 163, -89, 307 });
+		AddPointToLine({ 153, -95, 302 });
+		AddPointToLine({ 143,-101, 306 });
+		AddPointToLine({ 137,-107, 316 });
+		AddPointToLine({ 139,-113, 326 });
+		AddPointToLine({ 148,-119, 332 });
+		AddPointToLine({ 157,-125, 329 });
+		AddPointToLine({ 161,-131, 320 });
+		AddPointToLine({ 157,-137, 313 });
+		AddPointToLine({ 149,-143, 311 });
+		AddPointToLine({ 143,-149, 316 });
+		AddPointToLine({ 142,-155, 323 });
+		AddPointToLine({ 147,-161, 328 });
+		AddPointToLine({ 153,-167, 327 });
+		AddPointToLine({ 156,-173, 322 });
+		AddPointToLine({ 150,-179, 320 });
+
+
+		// ============================================================
+		// РџР РћР”РћР›Р–Р•РќРР• Р’РўРћР РћР™ РЁРР РћРљРћР™ Р›РРќРР
+		// ============================================================
+
+		// 2D
+		NewLine();
+		AddPointToLine({ 122,  -2, 309 });
+		AddPointToLine({ 117,   4, 324 });
+		AddPointToLine({ 131,   8, 341 });
+		AddPointToLine({ 157,   5, 354 });
+		AddPointToLine({ 181,  -1, 371 });
+		AddPointToLine({ 177,  -7, 384 });
+		AddPointToLine({ 157,  -8, 401 });
+		AddPointToLine({ 138,  -2, 412 });
+		AddPointToLine({ 129,  -6, 426 });
+
+		// 2E
+		NewLine();
+		AddPointToLine({ 131,   2, 416 });
+		AddPointToLine({ 131,   8, 429 });
+		AddPointToLine({ 144,   5, 446 });
+		AddPointToLine({ 166,   1, 459 });
+		AddPointToLine({ 183,  -4, 476 });
+		AddPointToLine({ 171,  -8, 489 });
+		AddPointToLine({ 144,  -3, 506 });
+		AddPointToLine({ 121,  -6, 519 });
+		AddPointToLine({ 130,  -4, 531 });
+
+		// 2F
+		NewLine();
+		AddPointToLine({ 124,  -1, 521 });
+		AddPointToLine({ 139,   6, 534 });
+		AddPointToLine({ 163,   8, 551 });
+		AddPointToLine({ 181,   1, 564 });
+		AddPointToLine({ 176,  -6, 581 });
+		AddPointToLine({ 159,  -7, 591 });
+		AddPointToLine({ 150,  -5, 600 });
 
 	
-
-//============================================================
-// 5 ИЗВИЛИСТЫХ ПОТОКОВ
-// Начало: Z = 0
-// Конец:  Z = 10000
-// Радиус: ~5
-// Шаг точек: 25
-// Разрывы: ~20
-//============================================================
-
-
-//============================================================
-// Л1
-//============================================================
-
-		NewLine();
-		AddPointToLine({ 5,  0,    0 });
-		AddPointToLine({ 4,  2,   25 });
-		AddPointToLine({ 2,  4,   50 });
-		AddPointToLine({ -1,  5,   75 });
-		AddPointToLine({ -4,  3,  100 });
-		AddPointToLine({ -5,  0,  125 });
-		AddPointToLine({ -4, -3,  150 });
-		AddPointToLine({ -1, -5,  175 });
-		AddPointToLine({ 3, -4,  200 });
-		AddPointToLine({ 5, -1,  227 });
-
-		NewLine();
-		AddPointToLine({ 5,  2,  245 });
-		AddPointToLine({ 3,  4,  270 });
-		AddPointToLine({ 0,  5,  295 });
-		AddPointToLine({ -3,  4,  322 });
-		AddPointToLine({ -5,  1,  345 });
-		AddPointToLine({ -4, -3,  370 });
-		AddPointToLine({ -1, -5,  387 });
-		AddPointToLine({ 3, -4,  418 });
-		AddPointToLine({ 5, -1,  436 });
-		AddPointToLine({ 5, -1,  459 });
-		AddPointToLine({ 5, 2,  495 });
-		AddPointToLine({ 39,  11,  465 });
-
-		NewLine();
-		AddPointToLine({ 1,  5,  490 });
-		AddPointToLine({ -2,  5,  515 });
-		AddPointToLine({ -4,  3,  540 });
-		AddPointToLine({ -5,  0,  565 });
-		AddPointToLine({ -4, -3,  590 });
-		AddPointToLine({ -1, -5,  615 });
-		AddPointToLine({ 3, -4,  640 });
-		AddPointToLine({ 5, -1,  665 });
-		AddPointToLine({ 5,  2,  691 });
-		AddPointToLine({ 3,  4,  716 });
-
-		NewLine();
-		AddPointToLine({ 0,  5,  735 });
-		AddPointToLine({ -3,  4,  760 });
-		AddPointToLine({ -5,  1,  785 });
-		AddPointToLine({ -4, -3,  810 });
-		AddPointToLine({ -1, -5,  835 });
-		AddPointToLine({ 3, -4,  860 });
-		AddPointToLine({ 5, -1,  885 });
-		AddPointToLine({ 4,  3,  910 });
-		AddPointToLine({ 1,  5,  933 });
-		AddPointToLine({ -2,  5,  956 });
-
-		NewLine();
-		AddPointToLine({ -4,  3,  980 });
-		AddPointToLine({ -5,  0, 1005 });
-		AddPointToLine({ -4, -3, 1030 });
-		AddPointToLine({ -1, -5, 1055 });
-		AddPointToLine({ 3, -4, 1080 });
-		AddPointToLine({ 5, -1, 1105 });
-		AddPointToLine({ 5,  2, 1130 });
-		AddPointToLine({ 3,  4, 1155 });
-		AddPointToLine({ 0,  5, 1180 });
-		AddPointToLine({ -3,  4, 1208 });
-
-
-		//============================================================
-		// Л2
-		//============================================================
-
-		NewLine();
-		AddPointToLine({ -2,  5,    0 });
-		AddPointToLine({ -4,  3,   25 });
-		AddPointToLine({ -5,  0,   50 });
-		AddPointToLine({ -4, -3,   75 });
-		AddPointToLine({ -1, -5,  100 });
-		AddPointToLine({ 3, -4,  125 });
-		AddPointToLine({ 5, -1,  150 });
-		AddPointToLine({ 5,  2,  175 });
-		AddPointToLine({ 3,  4,  200 });
-		AddPointToLine({ 0,  5,  225 });
-		AddPointToLine({ -3,  4,  249 });
-
-		NewLine();
-		AddPointToLine({ -5,  1,  270 });
-		AddPointToLine({ -4, -3,  295 });
-		AddPointToLine({ -1, -5,  320 });
-		AddPointToLine({ 3, -4,  345 });
-		AddPointToLine({ 5, -1,  370 });
-		AddPointToLine({ 4,  3,  395 });
-		AddPointToLine({ 1,  5,  423 });
-		AddPointToLine({ -2,  5,  455 });
-		AddPointToLine({ -4,  3,  476 });
-		AddPointToLine({ -24,  0,  474 });
-
-		NewLine();
-		AddPointToLine({ -4, -3,  515 });
-		AddPointToLine({ -1, -5,  540 });
-		AddPointToLine({ 3, -4,  565 });
-		AddPointToLine({ 5, -1,  590 });
-		AddPointToLine({ 5,  2,  615 });
-		AddPointToLine({ 3,  4,  640 });
-		AddPointToLine({ 0,  5,  665 });
-		AddPointToLine({ -3,  4,  690 });
-		AddPointToLine({ -5,  1,  715 });
-		AddPointToLine({ -4, -2,  739 });
-
-
-		//============================================================
-		// Л3
-		//============================================================
-
-		NewLine();
-		AddPointToLine({ -5, -1,    0 });
-		AddPointToLine({ -4,  3,   25 });
-		AddPointToLine({ -1,  5,   50 });
-		AddPointToLine({ 3,  4,   75 });
-		AddPointToLine({ 5,  1,  100 });
-		AddPointToLine({ 4, -3,  125 });
-		AddPointToLine({ 1, -5,  150 });
-		AddPointToLine({ -2, -5,  175 });
-		AddPointToLine({ -4, -3,  200 });
-		AddPointToLine({ -5,  0,  225 });
-
-		NewLine();
-		AddPointToLine({ -4,  3,  248 });
-		AddPointToLine({ -1,  5,  275 });
-		AddPointToLine({ 3,  4,  300 });
-		AddPointToLine({ 5,  1,  325 });
-		AddPointToLine({ 4, -3,  350 });
-		AddPointToLine({ 1, -5,  375 });
-		AddPointToLine({ -2, -5,  400 });
-		AddPointToLine({ -4, -3,  425 });
-		AddPointToLine({ -5,  0,  450 });
-		AddPointToLine({ -4,  3,  476 });
-
-		NewLine();
-		AddPointToLine({ -1,  5,  495 });
-		AddPointToLine({ 3,  4,  520 });
-		AddPointToLine({ 5,  1,  545 });
-		AddPointToLine({ 4, -3,  570 });
-		AddPointToLine({ 1, -5,  595 });
-		AddPointToLine({ -2, -5,  620 });
-		AddPointToLine({ -4, -3,  645 });
-		AddPointToLine({ -5,  0,  670 });
-		AddPointToLine({ -4,  3,  695 });
-		AddPointToLine({ -1,  5,  723 });
-
-
-		//============================================================
-		// Л4
-		//============================================================
-
-		NewLine();
-		AddPointToLine({ 3, -4,    0 });
-		AddPointToLine({ 5, -1,   25 });
-		AddPointToLine({ 5,  2,   50 });
-		AddPointToLine({ 3,  4,   75 });
-		AddPointToLine({ 0,  5,  100 });
-		AddPointToLine({ -3,  4,  125 });
-		AddPointToLine({ -5,  1,  150 });
-		AddPointToLine({ -4, -3,  175 });
-		AddPointToLine({ -1, -5,  200 });
-		AddPointToLine({ 3, -4,  225 });
-
-		NewLine();
-		AddPointToLine({ 5, -1,  245 });
-		AddPointToLine({ 4,  3,  270 });
-		AddPointToLine({ 1,  5,  295 });
-		AddPointToLine({ -2,  5,  320 });
-		AddPointToLine({ -4,  3,  345 });
-		AddPointToLine({ -5,  0,  370 });
-		AddPointToLine({ -4, -3,  395 });
-		AddPointToLine({ -1, -5,  420 });
-		AddPointToLine({ 3, -4,  445 });
-		AddPointToLine({ 5, -1,  470 });
-
-
-		//============================================================
-		// Л5
-		//============================================================
-
-		NewLine();
-		AddPointToLine({ -3,  4,    0 });
-		AddPointToLine({ -5,  1,   25 });
-		AddPointToLine({ -4, -3,   50 });
-		AddPointToLine({ -1, -5,   75 });
-		AddPointToLine({ 3, -4,  100 });
-		AddPointToLine({ 5, -1,  125 });
-		AddPointToLine({ 5,  2,  150 });
-		AddPointToLine({ 3,  4,  175 });
-		AddPointToLine({ 0,  5,  200 });
-		AddPointToLine({ -3,  4,  225 });
-
-		NewLine();
-		AddPointToLine({ -5,  1, 245 });
-		AddPointToLine({ -4, -3, 270 });
-		AddPointToLine({ -1, -5, 295 });
-		AddPointToLine({ 3, -4, 320 });
-		AddPointToLine({ 5, -1, 345 });
-		AddPointToLine({ 4,  3, 370 });
-		AddPointToLine({ 1,  5, 395 });
-		AddPointToLine({ -2,  5, 420 });
-		AddPointToLine({ -4,  3, 445 });
-		AddPointToLine({ -5,  0, 470 });
 		/*for (int i = 0; i < starsCount; i++)
 		{
-			// Начинаем с i + 1, чтобы не проверять i==j и не дублировать пары (j,i)
+			// РќР°С‡РёРЅР°РµРј СЃ i + 1, С‡С‚РѕР±С‹ РЅРµ РїСЂРѕРІРµСЂСЏС‚СЊ i==j Рё РЅРµ РґСѓР±Р»РёСЂРѕРІР°С‚СЊ РїР°СЂС‹ (j,i)
 			for (int j = i + 1; j < starsCount; j++)
 			{
 				float4 start = gemini[i];
 				float4 end = gemini[j];
 
-				// Проверка дистанции в исходном диапазоне -1...1
+				// РџСЂРѕРІРµСЂРєР° РґРёСЃС‚Р°РЅС†РёРё РІ РёСЃС…РѕРґРЅРѕРј РґРёР°РїР°Р·РѕРЅРµ -1...1
 				if (distance(start, end) < .75)
 				{
 					NewLine();
@@ -1113,7 +1764,7 @@ namespace Object {
 						p.y += getRandFloat()*rs;
 						p.z += getRandFloat()*rs;
 
-						// Масштабируем координаты точек для игрового мира
+						// РњР°СЃС€С‚Р°Р±РёСЂСѓРµРј РєРѕРѕСЂРґРёРЅР°С‚С‹ С‚РѕС‡РµРє РґР»СЏ РёРіСЂРѕРІРѕРіРѕ РјРёСЂР°
 						float scale = 600;
 						p.x *= scale;
 						p.y *= scale;
